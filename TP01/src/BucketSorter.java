@@ -17,7 +17,7 @@ public class BucketSorter {
 			} 
 		} 
 		int bucketInterval = (maxValue-minValue)/sample.size();
-		int bucketsCount = maxValue/bucketInterval + 1;
+		int bucketsCount = maxValue/bucketInterval;
 		ArrayList<ArrayList<Integer>> buckets = new ArrayList<ArrayList<Integer>>();
 		for(int i=0; i < bucketsCount; i++)
 		{

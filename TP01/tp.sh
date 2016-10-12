@@ -37,7 +37,7 @@ function calculseuil()
 	limitmax="$3"
 	pas="$4"
 	echo
-	cd testjava
+	cd src/
 	javac MainSeuil.java
 	if [ $? -eq 0 ]
 	then

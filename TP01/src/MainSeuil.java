@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MainSeuil 
 {
@@ -11,7 +15,7 @@ public class MainSeuil
 		{
 			System.exit(1);
 		}
-		if (nbargs > 4)
+		if (nbargs > 3)
 		{
 			System.exit(2);
 		}
@@ -22,23 +26,33 @@ public class MainSeuil
 			System.exit(3);
 		}
 		
-		int nbelement = Integer.parseInt(args[1]);
-		int limitmax = Integer.parseInt(args[2]);
-		int pas = Integer.parseInt(args[3]);
-		// args = 1
-		if(choice == 1)
+		if (nbargs == 2)
 		{
-			System.out.println("NombreElement,Insertion,Merge");
-			CalculSeuil.seuilMerge(nbelement, limitmax, pas);
-		}
-		// args = 2
-		if (choice == 2)
-		{
-			System.out.println("NombreElement,Insertion,Bucket");
-			CalculSeuil.seuilBucket(nbelement, limitmax, pas);
+			Scanner scanner;
+			ArrayList<Integer> mylist = new ArrayList<Integer>();
+			try 
+			{
+				scanner = new Scanner(new File(args[1]));
+				while(scanner.hasNextInt())
+				{
+					mylist.add(scanner.nextInt());
+				}
+			} 
+			catch (FileNotFoundException e) 
+			{
+				System.exit(4);
+			}
+			
+			if (choice == 1)
+			{
+				CalculSeuil.seuilMerge(mylist);
+			}
+			else if (choice == 2)
+			{
+				CalculSeuil.seuilBucket(mylist);
+			}
 		}
 		
 		System.exit(0);
 	}
-
 }

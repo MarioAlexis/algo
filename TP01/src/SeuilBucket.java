@@ -10,10 +10,7 @@ import java.util.List;
 
 public class SeuilBucket 
 {
-	static public ArrayList<Integer> bucketSeuilSort(ArrayList<Integer> sample){
-		
-		
-		
+	static public ArrayList<Integer> bucketSeuilSort(ArrayList<Integer> sample){	
 		
 		int minValue = sample.get(0);
 		int maxValue = 0 ;
@@ -27,15 +24,18 @@ public class SeuilBucket
 		} 
 		if(maxValue==minValue)
 			return sample;
-		int bucketInterval = ((maxValue - minValue)==0) ?  maxValue : (maxValue-minValue)/sample.size()+1;
-		int bucketsCount = maxValue/bucketInterval + 1;
+		int bucketsCount = ((maxValue - minValue) <= sample.size()) ?  (sample.size()) : (maxValue-minValue)/sample.size() + 1;
+		int bucketInterval = (maxValue - minValue)/bucketsCount + 1;
 		ArrayList<Integer> sortedSample = new ArrayList<Integer>();
 		ArrayList<ArrayList<Integer>> buckets = new ArrayList<ArrayList<Integer>>();
 		for(int i=0; i < bucketsCount; i++){
 			buckets.add(new ArrayList<Integer>());
 		}
-		for(int i=0; i<sample.size(); i++){
-			buckets.get(sample.get(i)/bucketInterval).add(sample.get(i));
+		for(int i=0; i<sample.size(); i++)
+		{ 
+			int test1 = sample.get(i);
+			int test = (sample.get(i)-minValue)/bucketInterval;
+			buckets.get(test).add(test1);
 		}
 		for(int j=0; j<bucketsCount; j++){
 			if (buckets.get(j).size()>1){

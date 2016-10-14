@@ -87,7 +87,7 @@ function calculseuilrecur()
 		echo -e "${orange} Demarrage du calcul du seuil avec $n elements avec les exemplaire {10,11,12,13,14,15,16,17,18,19}"
 		echo -e "Un fichier $namefile sera creer"
 		echo "Nombre element : ${n}" > ../$namefile
-		for i in {0..9}
+		for i in {10..19}
 		do
 			pathtxt="TextFiles/testset_${n}_${i}.txt"
 			echo -n "$i," >> ../$namefile
@@ -100,7 +100,7 @@ function calculseuilrecur()
 		echo -e "${orange} Demarrage du calcul du seuil avec $n elements avec les exemplaire {20,21,22,23,24,25,26,27,28,29}"
 		echo -e "Un fichier $namefile sera creer"
 		echo "Nombre element : ${n}" > ../$namefile
-		for i in {0..9}
+		for i in {19..29}
 		do
 			pathtxt="TextFiles/testset_${n}_${i}.txt"
 			echo -n "$i," >> ../$namefile

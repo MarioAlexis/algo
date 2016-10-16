@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CalculSeuil 
+public class MainSorter 
 {	
-	public static void seuilMerge(ArrayList<Integer> mylist)
+	public static void merge(boolean printsorted, boolean printtime, boolean isRecursive, ArrayList<Integer> mylist)
 	{
 		long startMerge, endMerge;
 		long totalMerge;
@@ -24,7 +24,7 @@ public class CalculSeuil
 		System.out.println(totalMerge + "," + sorted.get(0) + "," + sorted.get(sorted.size()-1)); 
 	}
 	
-	public static void seuilBucket(ArrayList<Integer> mylist)
+	public static void bucket(boolean printsorted, boolean printtime, boolean isRecursive, ArrayList<Integer> mylist)
 	{
 		
 		//Random rand = new Random();
@@ -46,13 +46,12 @@ public class CalculSeuil
 		// MERGE 
 		// Start the Merge Sort
 		startBucket = System.currentTimeMillis();
-		ArrayList<Integer> sorted2 =  SeuilBucket.bucketSeuilSort(mylist);
+		ArrayList<Integer> sorted2 =  BucketSorter.bucketSort(mylist);
 		endBucket = System.currentTimeMillis();
 		// Get the difference
 		totalBucket = endBucket - startBucket;
 		
-		System.out.print(totalBucket + "," + sorted.get(0) + "," + sorted.get(sorted.size()-1));
-		if(sorted.equals(sorted2)) System.out.println(",SORTED !");
+		System.out.println(totalBucket + "," + sorted.get(0) + "," + sorted.get(sorted.size()-1));
 		
 	}
 

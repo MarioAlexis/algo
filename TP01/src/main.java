@@ -1,24 +1,45 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Scanner;
 
 public class main 
 {
+	
 	public static void main(String[] args) 
 	{
-		//System.out.println(System.currentTimeMillis());
-		List<Integer> mylist = new ArrayList<>();
-		Integer[] array = {56,89,12,3,1,77,125,19,23,41};
-		Collections.addAll(mylist, array);
+		boolean printsorted = (Integer.parseInt(args[0]) != 0);
+		boolean printtime = (Integer.parseInt(args[1]) != 0);
+		int choice = Integer.parseInt(args[2]);
 		
-		
-		List<Integer> sorted = BucketSorter.bucketSort(mylist, true);
-		//System.out.println(System.currentTimeMillis()
-		/*for(Integer element : sorted) 
+
+		Scanner scanner;
+		ArrayList<Integer> mylist = new ArrayList<Integer>();
+		try 
 		{
-            System.out.println(element);
-        }*/
-
+			scanner = new Scanner(new File(args[3]));
+			while(scanner.hasNextInt())
+			{
+				mylist.add(scanner.nextInt());
+			}
+		} 
+		catch (FileNotFoundException e) 
+		{
+			System.exit(1);
+		}
+		
+		switch (choice)
+		{
+			case 1 : MainSorter.merge(printsorted, printtime, false, mylist);
+				break;
+			case 2 : MainSorter.merge(printsorted, printtime, true, mylist);
+				break;
+			case 3 : MainSorter.bucket(printsorted, printtime, false, mylist);
+				break;
+			case 4 : MainSorter.bucket(printsorted, printtime, true, mylist);
+			default : break;
+		}
+		System.exit(0);
 	}
-
 }

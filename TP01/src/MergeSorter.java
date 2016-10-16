@@ -4,14 +4,18 @@ import java.util.Iterator;
  
 public class MergeSorter
 {
+	private final int MERGESEUIL = 2000;
+	
     public static <E extends Comparable<? super E>> List<E> mergeSort(List<E> m)
     {
         if(m.size() <= 1) return m;
  
+        
         int middle = m.size() / 2;
         List<E> left = m.subList(0, middle);
         List<E> right = m.subList(middle, m.size());
  
+        
         right = mergeSort(right);
         left = mergeSort(left);
         List<E> result = merge(left, right);

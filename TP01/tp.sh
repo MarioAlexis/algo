@@ -4,28 +4,30 @@ nocolor='\033[0m'
 red='\033[0;31m'
 green='\033[0;32m'
 orange='\033[0;33m'
+cyan='\033[0;36m'
+
+printsortedlist=0
+printtime=0
+
+function checklettre()
+{
+	if [ "$1" != "-e" ]
+	then
+			echo
+			echo -e "${red}-----ERROR-----${nocolor}"
+			echo -e "${red}Vous devez entrer l'option -e apres d'avoir choisi l'algo de tri${nocolor}"
+			echo
+			exit
+	fi
+}
 
 #Recoit en argurment l'erreur durant la compilation du code pour le calcul du seuil
 function seuilerror()
 {	
 	case $1 in
 		1)
-			echo -e "${red}Aucun argument fournir. SVP faite la commande ./tp.sh --help pour connaitre les arguments de l'option -s"
-			echo -e "${red}Error - Exit"
-			exit
-		;;
-		2)
-			echo -e "${red}Trop de argument fournir. SVP faite la commande ./tp.sh --help"
-			echo -e "${red}Error - Exit"
-			exit
-			;;
-		3)
-			echo -e "${red}Le premier argument doit etre 1 ou 2. Faire la commande ./tp.sh --help pour plus d'information"
-			echo -e "${red}Error - Exit"
-			exit
-		;;
-		4)
-			echo -e "${red} Fichier non existant. Verifiez le Path."
+			echo -e "${red}-----ERROR-----"
+			echo -e "${red} Fichier non existant. Verifiez le Path.${nocolor}"
 		;;
 		*)
 		;;
@@ -33,78 +35,125 @@ function seuilerror()
 }
 
 #Fonction pour etablir le seuil dans le merge sort et dans le bucket sort
-function calculseuil()
+function callsorting()
 {
-	choice="$1"
-	pathtxt="$2"
+	choicearg="$1"
+	choice=0
+	lettre="$2"
+	pathtxt="$3"
 	pathtxt=${pathtxt:4}
 	echo
 	cd src/
-	javac -Xlint MainSeuil.java
+	javac -Xlint main.java
 	if [ $? -eq 0 ]
 	then
-		echo -e "${green}***************\n${green}Calcul du seuil -- Compilation REUSSI\n${green}***************"
+		echo -e "${green}***************\n${green}Calcul du seuil -- Compilation REUSSI\n${green}***************${nocolor}"
 	fi
 	echo
-	echo -e "${orange}Demarrge du calcul du seuil${nocolor}"	
+	#merge
+	case $choicearg in
+		merge)
+			choice=1
+		;;
+		mergeSeuil)
+			choice=2
+		;;
+		bucket)
+			choice=3
+		;;
+		bucketSeuil)
+			choice=4
+		;;
+		*)
+			echo -e "${red}-----ERROR-----${nocolor}"
+			echo -e "${red}Taper la commande ${nocolor}--help ${red}pour connaitre les choix des tris${nocolor}"
+			echo
+			exit
+		;;
+	esac
+	checklettre $lettre
+	echo -e "${orange}Demarrge du tri avec ${cyan}${choicearg} ${orange}de la liste ${cyan}${pathtxt}${nocolor}"	
 	echo
-	java MainSeuil ${choice} ${pathtxt}
+	java main $printsortedlist $printtime $choice $pathtxt
 	seuilerror $?
 	echo
 	cd ../
 }
 
 #Fonction qui va lire une serie au complete
-function calculseuilrecur()
+function callall()
 {
-	choice="$1"
+
+	choicearg="$1"
+	choice=0
 	n="$2"
 	ne="$3"
-	namefile="calculseuil_${n}_${ne}.csv"
 	echo
 	cd src/
-	javac -Xlint MainSeuil.java
+	javac -Xlint main.java
 	if [ $? -eq 0 ]
 	then
-		echo -e "${green}***************\n${green}Calcul du seuil -- Compilation REUSSI\n${green}***************"
+		echo -e "${green}***************\n${green}Calcul du seuil -- Compilation REUSSI\n${green}***************${nocolor}"
 	fi
 	echo
+	#merge
+	case $choicearg in
+		merge)
+			choice=1
+		;;
+		mergeSeuil)
+			choice=2
+		;;
+		bucket)
+			choice=3
+		;;
+		bucketSeuil)
+			choice=4
+		;;
+		*)
+			echo -e "${red}-----ERROR-----${nocolor}"
+			echo -e "${red}Taper la commande ${nocolor}--help ${red}pour connaitre les choix des tris${nocolor}"
+			echo
+			exit
+		;;
+	esac
+	namefile="${choicearg}_${n}_${ne}.csv"
 	if [ ${ne} -eq 1 ]
 	then
-		echo -e "${orange} Demarrage du calcul du seuil avec $n elements avec les exemplaire {0,1,2,3,4,5,6,7,8,9}"
+		echo -e "${orange} Demarrage du tri avec ${cyan}${choicearg}  ${orange}avec $n elements provenants des exemplaire {0,1,2,3,4,5,6,7,8,9}${nocolor}"
 		echo -e "Un fichier $namefile sera creer"
 		echo "Nombre element : ${n}" > ../$namefile
 		for i in {0..9}
 		do
 			pathtxt="TextFiles/testset_${n}_${i}.txt"
 			echo -n "$i," >> ../$namefile
-			java MainSeuil ${choice} ${pathtxt} >> ../$namefile
+			java main 0 1 ${choice} ${pathtxt} >> ../$namefile
 			seuilerror $?
 		done
 	fi
 	if [ ${ne} -eq 2 ]
 	then
-		echo -e "${orange} Demarrage du calcul du seuil avec $n elements avec les exemplaire {10,11,12,13,14,15,16,17,18,19}"
+		echo -e "${orange} Demarrage du tri avec ${cyan}${choicearg}${orange} avec $n elements provenants des exemplaire {10,11,12,13,14,15,16,17,18,19}${nocolor}"
 		echo -e "Un fichier $namefile sera creer"
 		echo "Nombre element : ${n}" > ../$namefile
 		for i in {10..19}
 		do
 			pathtxt="TextFiles/testset_${n}_${i}.txt"
 			echo -n "$i," >> ../$namefile
-			java MainSeuil ${choice} ${pathtxt} >> ../$namefile
+			java java 0 1 ${choicearg} ${pathtxt} >> ../$namefile
 			seuilerror $?
 		done
 	fi
 	if [ ${ne} -eq 3 ]
 	then
-		echo -e "${orange} Demarrage du calcul du seuil avec $n elements avec les exemplaire {20,21,22,23,24,25,26,27,28,29}"
+		echo -e "${orange} Demarrage du tri avec ${cyan}${choicearg}${orange} avec $n elements provenant des exemplaire {20,21,22,23,24,25,26,27,28,29}${nocolor}"
 		echo -e "Un fichier $namefile sera creer"
 		echo "Nombre element : ${n}" > ../$namefile
 		for i in {19..29}
 		do
 			pathtxt="TextFiles/testset_${n}_${i}.txt"
 			echo -n "$i," >> ../$namefile
-			java MainSeuil ${choice} ${pathtxt} >> ../$namefile
+			java MainSeuil 0 1 ${choicearg} ${pathtxt} >> ../$namefile
 			seuilerror $?
 		done
 	fi	
@@ -134,12 +183,18 @@ do
   case $arg in
     --help|-help)
 	help
-    	;;
-    -s)
-	calculseuil $2 $3
+    ;;
+	-p|-P)
+	printsortedlist=1
 	;;
-	-sr)
-	calculseuilrecur $2 $3 $4
+	-t|-T)
+	printtime=1
+	;;
+    -a)
+	callsorting $2 $3 $4
+	;;
+	-all)
+	callall $2 $3 $4
 	;;	
     #default
     *)

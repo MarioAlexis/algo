@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.security.Principal;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class main
 		
 
 		Scanner scanner;
-		ArrayList<Integer> mylist = new ArrayList<Integer>();
+		List<Integer> mylist = new ArrayList<Integer>();
 		try 
 		{
 			scanner = new Scanner(new File(args[3]));
@@ -38,6 +39,7 @@ public class main
 			case 3 : MainSorter.bucket(printsorted, printtime, false, mylist);
 				break;
 			case 4 : MainSorter.bucket(printsorted, printtime, true, mylist);
+				break;
 			default : break;
 		}
 		System.exit(0);

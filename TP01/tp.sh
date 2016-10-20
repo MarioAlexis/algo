@@ -87,76 +87,58 @@ function callall()
 	choicearg="$1"
 	choice=0
 	n="$2"
-	ne="$3"
 	echo
 	cd src/
 	javac -Xlint main.java
 	if [ $? -eq 0 ]
 	then
-		echo -e "${green}***************\n${green}Calcul du seuil -- Compilation REUSSI\n${green}***************${nocolor}"
-	fi
-	echo
-	#merge
-	case $choicearg in
-		merge)
+		#case for choicearg
+		case $choicearg in
+			merge)
 			choice=1
-		;;
-		mergeSeuil)
+			;;
+			mergeSeuil)
 			choice=2
-		;;
-		bucket)
+			;;
+			bucket)
 			choice=3
-		;;
-		bucketSeuil)
+			;;
+			bucketSeuil)
 			choice=4
-		;;
-		*)
+			;;
+			*)
 			echo -e "${red}-----ERROR-----${nocolor}"
 			echo -e "${red}Taper la commande ${nocolor}--help ${red}pour connaitre les choix des tris${nocolor}"
 			echo
 			exit
-		;;
-	esac
-	namefile="${choicearg}_${n}_${ne}.csv"
-	if [ ${ne} -eq 1 ]
-	then
-		echo -e "${orange} Demarrage du tri avec ${cyan}${choicearg}  ${orange}avec $n elements provenants des exemplaire {0,1,2,3,4,5,6,7,8,9}${nocolor}"
-		echo -e "Un fichier $namefile sera creer"
-		echo "Nombre element : ${n}" > ../$namefile
-		for i in {0..9}
-		do
-			pathtxt="TextFiles/testset_${n}_${i}.txt"
-			echo -n "$i," >> ../$namefile
-			java main 0 1 ${choice} ${pathtxt} >> ../$namefile
-			seuilerror $?
-		done
+			;;
+		esac
 	fi
-	if [ ${ne} -eq 2 ]
-	then
-		echo -e "${orange} Demarrage du tri avec ${cyan}${choicearg}${orange} avec $n elements provenants des exemplaire {10,11,12,13,14,15,16,17,18,19}${nocolor}"
-		echo -e "Un fichier $namefile sera creer"
-		echo "Nombre element : ${n}" > ../$namefile
-		for i in {10..19}
-		do
-			pathtxt="TextFiles/testset_${n}_${i}.txt"
-			echo -n "$i," >> ../$namefile
-			java java 0 1 ${choicearg} ${pathtxt} >> ../$namefile
-			seuilerror $?
-		done
-	fi
-	if [ ${ne} -eq 3 ]
-	then
-		echo -e "${orange} Demarrage du tri avec ${cyan}${choicearg}${orange} avec $n elements provenant des exemplaire {20,21,22,23,24,25,26,27,28,29}${nocolor}"
-		echo -e "Un fichier $namefile sera creer"
-		echo "Nombre element : ${n}" > ../$namefile
-		for i in {19..29}
-		do
-			pathtxt="TextFiles/testset_${n}_${i}.txt"
-			echo -n "$i," >> ../$namefile
-			java MainSeuil 0 1 ${choicearg} ${pathtxt} >> ../$namefile
-			seuilerror $?
-		done
-	fi	
+	namefile="${choicearg}_${n}_1.csv"
+	echo "${choicearg}_1" > ../$namefile
+	for i in {0..9}
+	do
+		java main 0 1 $choice Files/testset_${n}_$i.txt >> ../$namefile
+		seuilerror $?
+	done
+	namefile="${choicearg}_${n}_2.csv"
+	echo "${choicearg}_2" > ../$namefile
+	for i in {10..19}
+	do
+		java main 0 1 $choice Files/testset_${n}_$i.txt >> ../$namefile
+		seuilerror $?
+	done
+	namefile="${choicearg}_${n}_3.csv"
+	echo "${choicearg}_3" > ../$namefile
+	for i in {20..29}
+	do
+		java main 0 1 $choice Files/testset_${n}_$i.txt >> ../$namefile
+		seuilerror $?
+	done
+	cd ../
+	echo -e "${n}, ," > concat_${choicearg}_${n}.csv
+	paste ${choicearg}_${n}*.csv >> concat_${choicearg}_${n}.csv
+	rm -rf ${choicearg}*.csv
 }
 
 # Help Function
@@ -194,7 +176,7 @@ do
 	callsorting $2 $3 $4
 	;;
 	-all)
-	callall $2 $3 $4
+	callall $2 $3
 	;;	
     #default
     *)

@@ -3,7 +3,8 @@ import java.util.List;
 
 public class BucketSorter 
 {
-	static public ArrayList<Integer> bucketSort(ArrayList<Integer> sample){	
+	private static final int BUCKETSEUIL = 190;
+	static public List<Integer> bucketSort(boolean isThreshold, List<Integer> sample){	
 		
 		int minValue = sample.get(0);
 		int maxValue = 0 ;
@@ -19,8 +20,8 @@ public class BucketSorter
 			return sample;
 		int bucketsCount = ((maxValue - minValue) <= sample.size()) ?  (sample.size()) : (maxValue-minValue)/sample.size() + 1;
 		int bucketInterval = (maxValue - minValue)/bucketsCount + 1;
-		ArrayList<Integer> sortedSample = new ArrayList<Integer>();
-		ArrayList<ArrayList<Integer>> buckets = new ArrayList<ArrayList<Integer>>();
+		List<Integer> sortedSample = new ArrayList<Integer>();
+		List<List<Integer>> buckets = new ArrayList<List<Integer>>();
 		for(int i=0; i < bucketsCount; i++){
 			buckets.add(new ArrayList<Integer>());
 		}
@@ -30,11 +31,21 @@ public class BucketSorter
 			int test = (sample.get(i)-minValue)/bucketInterval;
 			buckets.get(test).add(test1);
 		}
-		for(int j=0; j<bucketsCount; j++){
-			if (buckets.get(j).size()>1){
-				buckets.set(j, bucketSort(buckets.get(j)));
+		for(int j=0; j<bucketsCount; j++)
+		{
+			if (buckets.get(j).size()>1)
+			{
+				if(isThreshold && buckets.get(j).size() < BUCKETSEUIL)
+				{
+					buckets.set(j, InsertionSorter.insertionSort(buckets.get(j)));
+				}
+				else
+				{
+					buckets.set(j, bucketSort(isThreshold, buckets.get(j)));
+				}
 			}
-			if (buckets.get(j).size()!=0){
+			if (buckets.get(j).size()!=0)
+			{
 				for(int i=0; i<buckets.get(j).size(); i++){
 					sortedSample.add(buckets.get(j).get(i));
 				}

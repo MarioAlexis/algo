@@ -4,33 +4,36 @@ import java.util.Iterator;
  
 public class MergeSorter
 {
-	private final int MERGESEUIL = 2000;
+	private static final int MERGESEUIL = 245;
 	
-    public static <E extends Comparable<? super E>> List<E> mergeSort(List<E> m)
+    public static List<Integer> mergeSort(boolean isThreshold, List<Integer> m)
     {
-        if(m.size() <= 1) return m;
+		if(isThreshold && m.size() < MERGESEUIL)
+			return InsertionSorter.insertionSort(m);
+		else
+			if(m.size() <= 1) return m;
  
         
         int middle = m.size() / 2;
-        List<E> left = m.subList(0, middle);
-        List<E> right = m.subList(middle, m.size());
+        List<Integer> left = m.subList(0, middle);
+        List<Integer> right = m.subList(middle, m.size());
  
         
-        right = mergeSort(right);
-        left = mergeSort(left);
-        List<E> result = merge(left, right);
+        right = mergeSort(isThreshold, right);
+        left = mergeSort(isThreshold, left);
+        List<Integer> result = merge(left, right);
  
         return result;
     }
  
-    private static <E extends Comparable<? super E>> List<E> merge(List<E> left, List<E> right)
+    private static List<Integer> merge(List<Integer> left, List<Integer> right)
     {
-        List<E> result = new ArrayList<E>();
-        Iterator<E> it1 = left.iterator();
-        Iterator<E> it2 = right.iterator();
+        List<Integer> result = new ArrayList<Integer>();
+        Iterator<Integer> it1 = left.iterator();
+        Iterator<Integer> it2 = right.iterator();
  
-	E x = it1.next();
-	E y = it2.next();
+	Integer x = it1.next();
+	Integer y = it2.next();
         while (true){
             //change the direction of this comparison to change the direction of the sort
             if(x.compareTo(y) <= 0){

@@ -1,0 +1,666 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University/School Laboratory Report
+% LaTeX Template
+% Version 3.0 (4/2/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Linux and Unix Users Group at Virginia Tech Wiki 
+% (https://vtluug.org/wiki/Example_LaTeX_chem_lab_report)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage[utf8]{inputenc} % placer ici votre encodage préféré
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{amsmath}
+\usepackage{float}
+\restylefloat{table}
+
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+\renewcommand{\tablename}{Tableau:}
+%\usepackage{times} % Uncomment to use the Times New Roman font
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Determination of the Atomic \\ Weight of Magnesium \\ CHEM 101} % Title
+
+\author{John \textsc{Smith}} % Author name
+
+\date{\today} % Date for the report
+
+\begin{document}
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+
+\begin{description}
+\item[Objectif du laboratoire] \hfill \\
+
+L'utilisation des matériaux ferromagnétiques sont à la base du fonctionnement de plusieurs
+appareils technologiques de nos jours, grâce à sa caractéristique unique qui consiste a produire un champ magnétique en l'absence de champ magnétique extérieur. Ce phénomène se produit lorsque le matériau reçoit initialement un champ magnétique externe qui vient alligner les dipôles magnétique jusqu'à une certaine aimantation maximale. Grâce 
+a cette information, nous pouvons tracer une courbe d'hystérésis représentant l'aimantation jusqu'à son point saturation. Le but de ce laboratoire consiste à déterminer expérimentalement les caractéristique des deux matériaux ferromagnétique à partir de sa courbe d'hystérésis.
+\end{description}
+ 
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+
+\section{Méthodologie expérimentale}
+Nous allons utiliser un oscilloscope pour produire la courbe d'hystérésis du matériau, mais celui-ci ne peut pas lire directement le champ magnétique $\vec{H}$ et sa densité $\vec{B}$. Grâce à quelques composantes électrique comme une résistance et un condensateur, nous pouvons lire à l'écran du oscilloscope une valeure qui est proportionnelle à celle qu'on recherche.
+
+\begin{description} 
+\item[Mesure du champ magnétique $\vec{H}$] \hfill \\
+
+Prenond en considération les montages, qui suivent, des circuits pour mésurer la perméabilité du tore $A$ et du tore $B$.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{montageA}
+\caption{Schéma de montage pour la mesure de la perméabilité du Tore $A$}
+\label{fig:montage1}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{montageB}
+\caption{Schéma de montage pour la mesure de la perméabilité du Tore $B$}
+\label{fig:montage2}
+\end{center}
+\end{figure}
+
+\pagebreak
+D'après la loi d'Ampère, on a : \\
+
+\begin{equation}
+\oint H\partial l = N_1 I_1
+\end{equation}
+
+\begin{equation}
+\Rightarrow H \approx \frac{N_1 I_1}{L_1}
+\end{equation}
+
+D'après la loi d'Ohm on a aussi:
+
+\begin{equation}
+V_1 = R_1 I_1
+\end{equation}
+
+La tension $V_1$, mesurée à l'oscilloscope est donc proportionnelle à $H$. On a alors:\\
+
+\begin{equation}
+H \approx \frac{N_1 V_1}{L_1 R_1} = K_x V_1
+\end{equation}
+
+
+\item[Mesure de l'induction magnétique $\vec{B}$] \hfill \\
+
+D'après la loi de Faraday, la tension $V_2$ aux bourne de l'enroulement secondaire est:\\
+
+\begin{equation}
+V_2 = -N_2 \frac{\partial}{\partial t}\ \left[ \int \vec{B}\ \vec{\partial S}\right]
+\approx -N_2A_2\frac{\partial B}{\partial t}
+\end{equation}
+
+Où $B$ est l'induction magétique produite dans l'enroulement par le matériau. On peut dire alors que la tension aux bornes du condensateur est :\\
+
+\begin{equation*}
+V_c = \frac{1}{C} \int_0^t\! I_2\, \partial t = \frac{1}{C} \int_0^t\! \frac{N_2A_2}{R_2}\, \frac{\partial B}{\partial t} \partial t = \frac{N_2A_2B}{R_2C}
+\end{equation*}
+
+D'où\\
+
+\begin{equation}
+B = \frac{R_2C}{N_2A_2} \cdot\, V_c = K_y\, V_c
+\end{equation}
+
+\pagebreak
+
+\item[Données physiques du Tore $A$]\hfill\\
+\begin{itemize}
+\item $L_1$ est la circonférence moyenne du tore, $L_1 = 76\pm 1 mm$
+\item $R_1$ est larésistance dans le courant primaire, $R_1 = 8\Omega$ à $ 5\%$
+\item $N_1$ est le nombre de tour de fil de l'enroulement primaire, $N_1 = 3420$
+\item $A_2$ est l'aire de la section de l'enroulement secondaire, $A_2 = 90.25\pm 0.05mm^{2}$
+\item $R_2$ est la résistance dans le courant secondaire, $R_2 = 270k\Omega$ à $5\%$
+\item $N_2$ est le nombre de tour de fil de l'enroulement secondaire, $N_2 = 820$
+\item $C$ est le condensateur du circuit, $C = 220nF$ à $5\%$ 
+\end{itemize}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.28\textwidth]{TOREA}
+\caption{Tore $A$}
+\label{fig:montage3}
+\end{center}
+\end{figure}
+
+
+\item[Données physiques du Tore $B$]\hfill\\
+\begin{itemize}
+\item $L_1$ est la circonférence moyenne du tore, $L_1 = 67.5\pm 0.5 mm$
+\item $R_1$ est larésistance dans le courant primaire, $R_1 = 8\Omega$ à $ 5\%$
+\item $N_1$ est le nombre de tour de fil de l'enroulement primaire, $N_1 = 46$
+\item $A_2$ est l'aire de la section de l'enroulement secondaire, $A_2 = 31.85\pm 0.05mm^{2}$
+\item $R_2$ est la résistance dans le courant secondaire, $R_2 = 100k\Omega$ à $5\%$
+\item $N_2$ est le nombre de tour de fil de l'enroulement secondaire, $N_2 = 18$
+\item $C$ est le condensateur du circuit, $C = 15nF$ à $5\%$ 
+\end{itemize}
+
+
+
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.28\textwidth]{TOREB}
+\caption{Tore $B$}
+\label{fig:montage4}
+\end{center}
+\end{figure}
+
+\pagebreak
+
+
+\end{description}
+%----------------------------------------------------------------------------------------
+%	SECTION 3
+%----------------------------------------------------------------------------------------
+
+\section{Présentation des résultats}
+
+\begin{description}
+
+\item[Première aimantation des tores $A$ et $B$] \hfill \\
+
+Malheuresement, l'oscilloscope ne peut pas nous donner directement la courbe de première aimantation. Pour avoir une idée de cette dernière, nous avons pris cinq points de la courbe d'hystérésis avant qu'elle à son point de saturation. Pour pourvoir trouver la perméabilité $\mu_r$ des matériaux, il est essentiel de trouver la courbe de première aimantation, car $\mu_r$ représente la pente de cette courbe. Alors on a :\\
+
+\begin{equation}
+B = \mu\, H = \mu_0\, \mu_r\, H
+\end{equation}
+
+\begin{equation}
+\Rightarrow \mu_r = \frac{B}{\mu_0\, H}
+\end{equation}
+
+Voici le tableau des cinq points de la courbe de première aimantation avec un possible résultat pour la perméabilité relative $\mu_r$ du tore $A$.
+
+\begin{table}[h]
+\begin{center}
+\caption{Données pour calculer la perméabilité du tore $A$}
+\begin{tabular}{|c|c||c|c|c|}
+\hline
+\begin{tabular}{c}\textbf{$V_1\pm\Delta V_1$}\\ \textbf{($mV$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$H\pm\Delta H$}\\ \textbf{($A/m$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$V_c\pm\Delta V_c$}\\ \textbf{($mV$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$B\pm\Delta B$}\\ \textbf{($mT$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$\mu_A\pm\Delta\mu_A$}\\ \textbf{($mH/m$)}\end{tabular}\\
+\hline
+\hline
+$13.6\pm 0.5$ & $76\pm 8$ & $58\pm 2$ & $46\times 10^{-3}\pm 7\times 10^{-3}$ & $500\pm 100$\\
+\hline
+$16.6\pm 0.5$ & $93\pm 9$ & $79\pm 2$ & $63\times 10^{-3}\pm 9\times 10^{-3}$ & $500\pm 100$\\
+\hline
+$22.6\pm 0.5$ & $130\pm 10$ & $126\pm 5$ & $10\times 10^{-2}\pm 2\times 10^{-2}$ & $600\pm 200$\\
+\hline
+$28\pm 1$ & $160\pm 20$ & $162\pm 5$ & $13\times 10^{-2}\pm 2\times 10^{-2}$ & $600\pm 200$\\
+\hline
+$32\pm 1$ & $180\pm 20$ & $194\pm 5$ & $16\times 10^{-2}\pm 2\times 10^{-2}$ & $700\pm 200$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Voici maintenant un graphe qui approxime la pente de la fonction de la courbe de première aimantation du matériau $A$.\\
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{premiereaimantationtoreA}
+\caption{Courbe de première aimantation du tore $A$}
+\label{fig:montage5}
+\end{center}
+\end{figure}
+
+\pagebreak
+
+Comme pour le tore $A$, voici le tableau avec les résultats pour le tore $B$.
+
+\begin{table}[h]
+\begin{center}
+\caption{Données pour calculer la perméabilité du tore $B$}
+\begin{tabular}{|c|c||c|c|c|}
+\hline
+\begin{tabular}{c}\textbf{$V_1\pm\Delta V_1$}\\ \textbf{($mV$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$H\pm\Delta H$}\\ \textbf{($A/m$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$V_c\pm\Delta V_c$}\\ \textbf{($mV$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$B\pm\Delta B$}\\ \textbf{($mT$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$\mu_A\pm\Delta\mu_A$}\\ \textbf{($mH/m$)}\end{tabular}\\
+\hline
+\hline
+$112\pm 5$ & $10\pm 1$ & $28\pm 1$ & $0.07\pm 0.01$ & $6000\pm 1000$\\
+\hline
+$152\pm 5$ & $13\pm 1$ & $38\pm 1$ & $0.1\pm 0.01$ & $6000\pm 1000$\\
+\hline
+$218\pm 5$ & $19\pm 2$ & $56\pm 2$ & $0.15\pm 0.02$ & $6000\pm 2000$\\
+\hline
+$272\pm 10$ & $23\pm 2$ & $68\pm 2$ & $0.18\pm 0.02$ & $6000\pm 2000$\\
+\hline
+$356\pm 10$ & $30\pm 3$ & $98\pm 2$ & $0.25\pm 0.02$ & $7000\pm 2000$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+On ici le graphe qui approxime la pente de la fonction de la courbe de première aimantation du matériau $B$.\\
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{premiereaimantationtoreB}
+\caption{Courbe de première aimantation du tore $B$}
+\label{fig:montage6}
+\end{center}
+\end{figure}
+
+En regardant le tableau $1$ et le tableau $2$, on conclut que le matériau du tore $A$ est composé de $nickel$. Le nickel a une perméabilité $\mu_r$ de 600. Tandis que le matériau du tore $B$ est composé de $ferrite$. En prenant en compte l'incertitude $\Delta\mu_B$ du tableau $2$, on arrive à une valeure très proche de $10\, 000$ qui est la perméabilité $\mu_r$ du ferrite.\\
+
+\item[Caractéristiques à saturation des deux matériaux]\hfill \\
+
+Une fois que les matériaux atteignent leurs point de saturation, on remarque que la courbe d'hystérésis tend vers l'infini de façon linéaire en suivant cette fonction:
+
+\begin{equation}
+B = \mu\, H + B_s
+\end{equation}
+
+Il est possible de déterminer $B_s$ graphiquement comme aussi $B_r$ (lorsque $H = 0$) et $H_c$ (lorsque $B = 0$).
+Voici les courbes d'hystérésis des chacuns des matériaux au moment où ils atteignent leurs point de saturation.
+
+\pagebreak
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.35\textwidth]{HysteresisA}
+\caption{Courbe d'hystérésis du tore $A$}
+\label{fig:montage7}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.35\textwidth]{HysteresisB}
+\caption{Courbe d'hystérésis du tore $B$}
+\label{fig:montage8}
+\end{center}
+\end{figure}
+
+En regardant le la figure $7$ et la figure $8$, nous avons rassemblé les données dans deux tabeau, les voici:\\
+
+\begin{table}[H]
+\begin{center}
+\caption{Caractéristique à saturation du tore $A$}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+\begin{tabular}{c}\textbf{Caractéristique}\end{tabular} &
+\begin{tabular}{c}\textbf{Nombre de}\\ \textbf{divisions}\end{tabular} &
+\begin{tabular}{c}\textbf{échelle}\\ \textbf{($V/div$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$V$($B_s$)}\\ \textbf{($V$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$\Delta V$($B_s$)}\\ \textbf{(V)}\end{tabular} &
+\begin{tabular}{c}\textbf{Résultats}\end{tabular}\\
+\hline
+\hline
+\textbf{$B_s\pm\Delta B_s\ (mT)$} & $2$ & $0.5$ & $1$ & $\pm 0.05$ & $0.8\pm 0.1$\\
+\hline
+\textbf{$B_r\pm\Delta B_r\ (mT)$} & $3.6$ & $0.1$ & $0.36$ & $\pm 0.01$ & $0.29\pm 0.04$\\
+\hline
+\textbf{$H_c\pm\Delta H_c\ (A/m)$} & $4.6$ & $0.01$ & $0.046$ & $\pm 0.001$ & $260\pm 20$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+\begin{table}[H]
+\begin{center}
+\caption{Caractéristique à saturation du tore $B$}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+\begin{tabular}{c}\textbf{Caractéristique}\end{tabular} &
+\begin{tabular}{c}\textbf{Nombre de}\\ \textbf{divisions}\end{tabular} &
+\begin{tabular}{c}\textbf{échelle}\\ \textbf{($V/div$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$V$($B_s$)}\\ \textbf{($V$)}\end{tabular} &
+\begin{tabular}{c}\textbf{$\Delta V$($B_s$)}\\ \textbf{(V)}\end{tabular} &
+\begin{tabular}{c}\textbf{Résultats}\end{tabular}\\
+\hline
+\hline
+\textbf{$B_s\pm\Delta B_s\ (mT)$} & $1.4$ & $0.05$ & $0.07$ & $\pm 0.005$ & $18\times 10^{-5}\pm 3\times 10^{-5}$\\
+\hline
+\textbf{$B_r\pm\Delta B_r\ (mT)$} & $3.6$ & $0.01$ & $0.036$ & $\pm 0.001$ & $9\times 10^{-5}\pm 1\times 10^{-5}$\\
+\hline
+\textbf{$H_c\pm\Delta H_c\ (A/m)$} & $1.8$ & $0.05$ & $0.09$ & $\pm 0.005$ & $7.7\pm 0.9$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\pagebreak
+\item[Énergie dissipée pour le tore $A$ et $B$]\hfill \\
+
+Lorsque le matériau ferromagnétique parcourt sa courbe d'hystérésis, il pert de l'énergie sous forme de chaleur. Cette énergie peut être calculée à partir de l'aire de la courbe d'hystérésis. La formule est :
+
+\begin{equation}
+P = \int_{-H_{max}}^{H_{max}}\! B\, \mathrm{d}H
+\end{equation}
+
+Cependant, nous ne connaissons pas la fonction $B$, car nous avons seulement le graphe qui a été donné par l'oscilloscope. Alors, nous allons proceder par une approximation linéaire. La partie curbée du graphe deviendra une fonction linéaire et nous allons intégrer à partir de ces fonctions. Nous avons choisit deux points ce qui nous permet de trouver la pente, donc la fonction. Voici ce qui ressemble la courbe d'hystérésis pour l'approximation.\\
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.35\textwidth]{HysteresisAintegrale}
+\caption{Approximation linéaire de la courbe d'hystérésis du tore $A$}
+\label{fig:montage9}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.35\textwidth]{HysteresisBintegrale}
+\caption{Approximation linéaire de la courbe d'hystérésis du tore $B$}
+\label{fig:montage10}
+\end{center}
+\end{figure}
+
+
+\pagebreak
+
+Si on compare la figure $9$ avec la figure $7$ et la figure $10$ avec la figure $8$, nous constatons clairement la différence.\\
+\\
+\textbf{Pour le tore $A$}\\
+\\
+Il faut trouver $B_{haut}$ et $B_{bas}$. Pour le $B_{haut}$ nous avons les points: $(0, 360)$ et $(230, 1100)$. Ce qui nous donne :
+
+\begin{equation}
+B_{haut} = \frac{74}{23}H + 360
+\end{equation}
+
+La même procédure pour trouver $B_{bas}$ avec les points $(0, -250)$ et $(230, 1100)$, ce qui nous donne :
+
+\begin{equation}
+B_{bas} = \frac{135}{23}H - 250
+\end{equation}
+
+Nous savons que notre $H_{max}$ est égale à 230 et la formule pour calculer $P_A$ est :
+
+\begin{equation}
+P_A = \int_0^{230}\! B_{haut}\,\mathrm{d}H - \int_0^{230}\! B_{bas}\,\mathrm{d}H
+\end{equation}
+
+À partir de ce calcul, nous obtenons l'énergie dissipée de la partie supérieure de la courbe d'hystérésis. Il faut seulement multiplé le résultat par deux et on obtient: $70.15\times 2 = 140.3$.\\
+Un exemple de calcul sera fait en Annexe.\\
+\\
+\textbf{Pour le tore $B$}\\
+\\
+Il s'agit ici de faire la même procédure précédente et de trouver $B_{haut}$ et $B_{bas}$ pour le tore $B$. Nous avons alors:
+
+\begin{equation}
+B_{haut} = \frac{-17}{70}H + 36
+\end{equation}
+
+\begin{equation}
+B_{bas} = \frac{-1}{8}H - 30
+\end{equation}
+
+Nous savons que $H_{max}$ est égale à 560, alors la formule pour trouver $P_B$ est:
+
+\begin{equation}
+P_B = \int_0^{560}\! B_{haut}\,\mathrm{d}H - \int_0^{560}\! B_{bas}\,\mathrm{d}H
+\end{equation}
+
+On obtient alors $18.48\times 2 = 36.96$ pour la valeure de $P_B$.
+
+\pagebreak
+
+\end{description}
+
+%
+%----------------------------------------------------------------------------------------
+%	SECTION 4
+%----------------------------------------------------------------------------------------
+
+\section{Discussion}
+
+\begin{description}
+\item[Comparaison des graphiques] \hfill\\
+
+
+
+\item[Efficacité du moteur] \hfill
+
+
+\item[Causes d'erreurs] \hfill\\
+
+
+\end{description}
+
+
+%----------------------------------------------------------------------------------------
+%%	SECTION 5
+%----------------------------------------------------------------------------------------
+
+\section{Conclusion}
+
+
+\pagebreak
+
+%----------------------------------------------------------------------------------------
+%	SECTION 6
+%----------------------------------------------------------------------------------------
+
+\section{Annexe}
+
+\begin{description}
+
+\item[Liste du matériels]\hfill
+\begin{itemize}
+\item Oscilloscope: GDS-1102A-U
+\item Autotransformateur: 0-120$V$ / 60$Hz$
+\item Générateur a.c. FG2A: 0-7$V$ / 2$kHz$
+\item Plaquette avec les tores $A$ et $B$
+\item Clé USB: sauvegarder en mémoire les courbes d'hystérésis\\
+\end{itemize}
+
+
+\item[Calcul de l'incertitude sur $K_x$]\hfill\\
+
+Tout d'abord, voici les formules nécessaires pour calculer $\Delta K_x$.\\
+Ici $N_1$ est constant et vaut 3420. \\
+Nos calculs respectent les unitées internationales.
+
+\begin{equation*}
+\left| \frac{\partial K_x}{\partial L_1} \right| = \frac{N_1}{L_1^{2}\times R_1}
+\end{equation*}
+
+\begin{equation*}
+\left| \frac{\partial K_x}{\partial R_1 } \right| = \frac{N_1}{L_1\times R_1^{2       }}
+\end{equation*}
+
+
+On peut désormais calculer l'incertude $K_x$ notée $\Delta K_x$. \hfill
+
+
+\begin{equation*}
+\Delta K_x = 
+\left| \frac{\partial K_x}{\partial L_1} \right|\Delta L_1 +
+\left| \frac{\partial K_x}{\partial R_1} \right|\Delta R_1
+\end{equation*}
+
+Maintenant, un exemple de calcul de $\Delta K_x$ pour le tore $A$.
+\begin{equation*}
+\Delta K_x = \frac{3420}{0.076^{2}\times 8}\times 0.001 +
+\frac{3420}{0.076\times 8^{2}}\times 0.4\approx 400
+\end{equation*}
+
+Exemple de calcul pour $K_x$ pour le tore $A$.
+
+\begin{equation*}
+K_x = \frac{3420}{0.076\times 8}\approx 5600
+\end{equation*}
+
+\item[Calcul de l'incertitude pour $K_y$] \hfill\\
+
+En premier lieu, voici les équations requises pour le calcul de $\Delta K_y$\\
+Ici $N_2$ est constant et vaut 820.
+
+\begin{equation*}
+\left| \frac{\partial K_y}{\partial R_2} \right| = \frac{C}{N_2\times A_2}
+\end{equation*}
+
+\begin{equation*}
+\left| \frac{\partial K_y}{\partial C} \right| = \frac{R_2}{N_2\times A_2}
+\end{equation*}
+
+\begin{equation*}
+\left| \frac{\partial K_y}{\partial A_2} \right| = \frac{R_2\times C}{N_2\times A_2^{2}}
+\end{equation*}
+
+\begin{equation*}
+\Delta K_y = 
+\left| \frac{\partial K_y}{\partial R_2} \right|\Delta R_2 +
+\left| \frac{\partial K_y}{\partial C} \right|\Delta C + 
+\left| \frac{\partial K_y}{\partial A_2} \right|\Delta A_2
+\end{equation*}
+
+Voici maintenant un exemple de calcul de l'incertitude sur $K_y$ pour le tore $A$
+
+\begin{equation*}
+\Delta K_y = \left(\frac{220\times 10^{-9}}{820\times 0.09025}\right)13500 +
+\left(\frac{270000}{820\times 0.09025}\right)11\times 10^{-9} +
+\left(\frac{220\times 10^{-9}\times 270000}{820\times (0.09025)^{2}}\right)5\times 10^{-5} \approx 1\times 10^{-4}
+\end{equation*}
+
+\item[Exemple de calcul de $H$ et son incertitude]\hfill\\
+
+
+\begin{equation*}
+\left| \frac{\partial H}{\partial K_x} \right| = V_1
+\end{equation*}
+
+\begin{equation*}
+\left| \frac{\partial H}{\partial V_1} \right| = K_x
+\end{equation*}
+
+\begin{equation*}
+\Delta H=
+\left| \frac{\partial H}{\partial K_x} \right|\Delta K_x +
+\left| \frac{\partial H}{\partial V_1} \right|\Delta V_1
+\end{equation*}
+
+Nous avons aussi :
+
+\begin{equation*}
+H = K_x\cdot V_1
+\end{equation*}
+
+Voila un exemple de calcul sur l'incertitude:
+
+\begin{equation*}
+\Delta H = (13.6/1000)\cdot 400 + 5600\cdot (0.5/1000) = \pm 8
+\end{equation*}
+
+\begin{equation*}
+H = 5600\cdot (13.6/1000) = 76 
+\end{equation*}
+
+\item[Exemple de calcul de $B$ et son incertitude]\hfill\\
+
+
+\begin{equation*}
+\left| \frac{\partial B}{\partial K_y} \right| = V_c
+\end{equation*}
+
+\begin{equation*}
+\left| \frac{\partial B}{\partial V_c} \right| = K_y
+\end{equation*}
+
+\begin{equation*}
+\Delta B =
+\left| \frac{\partial B}{\partial K_y} \right|\Delta K_y +
+\left| \frac{\partial B}{\partial V_c} \right|\Delta V_c
+\end{equation*}
+
+Nous avons aussi :
+
+\begin{equation*}
+B = K_y\cdot V_c
+\end{equation*}
+
+Voila un exemple de calcul sur l'incertitude:
+
+\begin{equation*}
+\Delta B = 28\cdot 0.0003 +0.0026\cdot 1 = \pm 0.01
+\end{equation*}
+
+\begin{equation*}
+B = 0.0026\cdot 28 = 0.07 
+\end{equation*}
+
+\pagebreak
+
+
+\item[Exemple de calcul d'énergie dissipée pour $P_A$]\hfill\\
+
+\begin{equation*}
+P_A = \int_0^{230}\! B_{haut}\,\mathrm{d}H - \int_0^{230}\! B_{bas}\,\mathrm{d}H
+\end{equation*}
+
+\begin{equation*}
+\Rightarrow P_A = \int_0^{230}\! \frac{74}{23}H + 360 \mathrm{d}H - \int_0^{230}\! \frac{135}{23}H -250 \mathrm{d}H
+\end{equation*}
+
+\begin{equation*}
+\Rightarrow P_A = \left[ \frac{74}{23}\cdot\left[ \frac{H^2}{2}\right]_0^{230} + 360\cdot\left[ H\right]_0^{230}\right] - \left[ \frac{135}{46}\cdot\left[ \frac{H^2}{2}\right]_0^{230} - 250\cdot\left[ H\right]_0^{230}\right]
+\end{equation*}
+
+\begin{equation*}
+\Rightarrow P_A = \left[ 85\, 100+ 85\, 800\right] - \left[ 155\,250- 57\,500\right]
+\end{equation*}
+
+\begin{equation*}
+P_A = \frac{167\, 900- 97\, 750}{1000}
+\end{equation*}
+
+\begin{equation*}
+P_A = 70.15
+\end{equation*}
+
+
+
+\end{description}
+\end{document}
+
+
+
+
+
+

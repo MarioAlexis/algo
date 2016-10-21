@@ -144,17 +144,14 @@ function callall()
 # Help Function
 function help()
 {
-  echo
-  echo -e  "-------------------------------\n      MENU AIDE POUR TP.SH\n-------------------------------\n"
-  echo
+  echo -e  "${cyan}-------------------------------\n      MENU AIDE POUR TP.SH\n-------------------------------\n${nocolor}"
   echo "Le script doit etre appeller ce cette maniere :"
   echo 
-  echo "          tp.sh [OPTIONS] -a [bucket | bucketSeuil | merge | mergeSeuil] -e path_vers_fichier_txt"
+  echo -e "          tp.sh ${orange}[OPTIONS]${nocolor} -a [bucket | bucketSeuil | merge | mergeSeuil] -e path_vers_fichier_txt"
   echo
-  echo "[OPTIONS] : "
+  echo -e "${orange}[OPTIONS]${nocolor} : "
   echo
-  echo -e "\t-p : Affiche les nombres tries\n\t-t : Affiche le temps d\'execution\n\t-s : Execute le code pour le calcul du seuil"
-  echo -e "\t     Ce dernier code va creer un fichier CSV qui explique notre choix du seuil\n\n"
+  echo -e "\t-p : Affiche les nombres tries\n\t-t : Affiche le temps d\'execution"
 }
 	
 # Parse Arguments
@@ -174,15 +171,16 @@ do
 	;;
     -a)
 	callsorting $2 $3 $4
+	shift 3
 	;;
 	-all)
 	callall $2 $3
+	shift 2
 	;;	
     #default
     *)
     echo "NEED ARGUMENTS"
-    ;;
-    
+    ;;    
   esac
   shift
 done

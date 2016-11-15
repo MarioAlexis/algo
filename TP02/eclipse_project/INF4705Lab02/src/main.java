@@ -4,17 +4,24 @@ import java.util.List;
 
 public class main {
 	public static void main(String [] args){
-		List<Block> blockList = new ArrayList<Block>();
+		List<Block> ascendingBlockList = new ArrayList<Block>();
 		List<Block> solution = new ArrayList<Block>();
 		
-		blockList = BlockListCreator.createBlockList("Files/b100_0");
-		shuffleBlockList(blockList);
-		solution = VoraciousTowerBuilder.build(blockList);
-		if (testSolution(solution)){
-			System.out.println("Tower solution is valid.");
-		} else {
-			System.out.println("Tower solution is invalid.");
-		}
+		//Pré-traitement
+		ascendingBlockList = BlockListCreator.createBlockList("C:/temp/workspace-ll/INF4705_Lab2/src/b100_0");
+		ascendingBlockList = BlockMergeSorter.mergeSort(false, ascendingBlockList);
+		List<Block> descendingBlockList = new ArrayList<Block>(ascendingBlockList);
+		Collections.reverse(descendingBlockList);
+		
+		System.out.println("---------Voracious---------");
+		solution = VoraciousTowerBuilder.build(ascendingBlockList);
+		testSolution(solution);
+		System.out.println("----------Dynamic----------");
+		solution = DynamicTowerBuilder.build(descendingBlockList);
+		testSolution(solution);
+		System.out.println("---------Tabu Search-------");
+		solution = TabuTowerBuilder.build(descendingBlockList);
+		testSolution(solution);
 	}
 	
 	public static boolean testSolution(List<Block> solution){
@@ -29,12 +36,10 @@ public class main {
 			}
 		}
 		if (bLegitSolution){
+			System.out.println("Tower solution is valid.");
 			System.out.println("Tower height = " + towerHeight);
+			System.out.println("Number of blocks used = " + solution.size());
 		}
 		return bLegitSolution;
-	}
-	
-	public static void shuffleBlockList(List<Block> blockList){
-		Collections.shuffle(blockList);
 	}
 }

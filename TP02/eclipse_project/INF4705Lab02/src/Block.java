@@ -14,5 +14,5 @@ public class Block {
 	}
 	public int height;
 	public int[] base;
-	public int area;
+	public Integer area;
 }

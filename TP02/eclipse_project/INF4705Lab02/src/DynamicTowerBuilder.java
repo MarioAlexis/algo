@@ -3,6 +3,8 @@ import java.util.List;
 
 public class DynamicTowerBuilder {
 	public static List<Block> build(boolean printTime, List<Block> list){
+		long startDyn, endDyn;
+		startDyn = System.nanoTime();
 		List<List<Block>> solution = new ArrayList<List<Block>>();
 		int [] maximumTowerHeight = new int[list.size()];
 		for (int i = 0; i < list.size(); i++){
@@ -29,6 +31,11 @@ public class DynamicTowerBuilder {
 				max = maximumTowerHeight[i];
 				idx = i;
 			}
+		}
+		endDyn = System.nanoTime();
+		if(printTime)
+		{
+			System.out.println(endDyn - startDyn);
 		}
 		return solution.get(idx);
 	}

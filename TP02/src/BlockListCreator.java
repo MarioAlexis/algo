@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class BlockListCreator {
+public class BlockListCreator 
+{
+	/*
+	 * Methode qui lis un fichier recu en argument et initialisation des blocks dans une structure de donnees
+	 */
 	public static List<Block> createBlockList (String filename){
 		List <Block> blockList = new ArrayList<Block>();
 		boolean error = false;

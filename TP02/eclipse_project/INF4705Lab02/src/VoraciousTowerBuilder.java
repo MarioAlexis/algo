@@ -4,16 +4,20 @@ import java.util.Random;
 
 public class VoraciousTowerBuilder {
 	public static List<Block> build(List<Block> list){
+		long startVorace, endVorace;		
+
+		startVorace = System.nanoTime();		
+		
 		List<Block> solution = new ArrayList<Block>();
 		Random randomGenerator = new Random();		
 		int cumulatedArea = 0;
 		int candidateChoice = 0;
 		int selectionCounter = 0;
 		int idx = 0;
-		//Puisque nous voulons une probabilité de sélection plus élevée en fontion de la surface effective 
-		//du bloc, nous allons générer un nombre aléatoire pour sélectionner un bloc en fonction des surfaces
-		//cumulées. (Les blocs sont déjà ordonnées en ordre croissant de surface) Ainsi, la probabilité
-		//relative de chaque bloc correspond à l'aire de sa surface effective.		
+		//Puisque nous voulons une probabilitï¿½ de sï¿½lection plus ï¿½levï¿½e en fontion de la surface effective 
+		//du bloc, nous allons gï¿½nï¿½rer un nombre alï¿½atoire pour sï¿½lectionner un bloc en fonction des surfaces
+		//cumulï¿½es. (Les blocs sont dï¿½jï¿½ ordonnï¿½es en ordre croissant de surface) Ainsi, la probabilitï¿½
+		//relative de chaque bloc correspond ï¿½ l'aire de sa surface effective.		
 		while (list.size() > 0){
 			idx = 0;
 			cumulatedArea = 0;
@@ -51,6 +55,8 @@ public class VoraciousTowerBuilder {
 			
 			list.remove(idx-1);
 		}
+		endVorace = System.nanoTime();
+		Main.voraceTime = endVorace - startVorace;
 		return solution;
 	}
 }

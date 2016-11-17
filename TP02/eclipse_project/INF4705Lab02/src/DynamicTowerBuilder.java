@@ -2,8 +2,8 @@
 import java.util.List;
 
 public class DynamicTowerBuilder {
-	public static List<Block> build(List<Block> list){
-		List<List<Block>> solution = new ArrayList<>();
+	public static List<Block> build(boolean printTime, List<Block> list){
+		List<List<Block>> solution = new ArrayList<List<Block>>();
 		int [] maximumTowerHeight = new int[list.size()];
 		for (int i = 0; i < list.size(); i++){
 			maximumTowerHeight[i] = list.get(i).height;

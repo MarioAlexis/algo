@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class TabuTowerBuilder {
-	public static List<Block> build(List<Block> list){
+	public static List<Block> build(boolean PrintTime, List<Block> list){
 		Random randomGenerator = new Random();
 		List<Block> solution = new ArrayList<Block>();
 		List<Block> currentSolution = new ArrayList<Block>();

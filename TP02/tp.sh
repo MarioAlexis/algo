@@ -6,7 +6,7 @@ green='\033[0;32m'
 orange='\033[0;33m'
 cyan='\033[0;36m'
 
-printsortedlist=0
+printtower=0
 printtime=0
 
 function checklettre()
@@ -35,7 +35,7 @@ function seuilerror()
 }
 
 #Fonction pour etablir le seuil dans le merge sort et dans le bucket sort
-function callsorting()
+function buildtower()
 {
 	choicearg="$1"
 	choice=0
@@ -44,25 +44,22 @@ function callsorting()
 	pathtxt=${pathtxt:4}
 	echo
 	cd src/
-	javac -Xlint main.java
+	javac -Xlint Main.java
 	if [ $? -eq 0 ]
 	then
-		echo -e "${green}***************\n${green}Calcul du seuil -- Compilation REUSSI\n${green}***************${nocolor}"
+		echo -e "${green}***************\n${green}Lancement du l'algorithme -- Compilation REUSSI\n${green}***************${nocolor}"
 	fi
 	echo
 	#merge
 	case $choicearg in
-		merge)
+		vorace)
 			choice=1
 		;;
-		mergeSeuil)
+		progdyn)
 			choice=2
 		;;
-		bucket)
+		tabou)
 			choice=3
-		;;
-		bucketSeuil)
-			choice=4
 		;;
 		*)
 			echo -e "${red}-----ERROR-----${nocolor}"
@@ -72,9 +69,9 @@ function callsorting()
 		;;
 	esac
 	checklettre $lettre
-	echo -e "${orange}Demarrge du tri avec ${cyan}${choicearg} ${orange}de la liste ${cyan}${pathtxt}${nocolor}"	
+	echo -e "${orange}Demarrge de l'algorithme ${cyan}${choicearg} ${orange}de la liste de bloques ${cyan}${pathtxt}${nocolor}"	
 	echo
-	java main $printsortedlist $printtime $choice $pathtxt
+	java Main $printtower $printtime $choice $pathtxt
 	seuilerror $?
 	echo
 	cd ../
@@ -105,7 +102,7 @@ function callall()
 			;;
 			*)
 			echo -e "${red}-----ERROR-----${nocolor}"
-			echo -e "${red}Taper la commande ${nocolor}--help ${red}pour connaitre les choix des tris${nocolor}"
+			echo -e "${red}Taper la commande ${nocolor}--help ${red}pour connaitre les choix des algorithmes disponibles${nocolor}"
 			echo
 			exit
 			;;
@@ -127,11 +124,11 @@ function help()
   echo -e  "${cyan}-------------------------------\n      MENU AIDE POUR TP.SH\n-------------------------------\n${nocolor}"
   echo "Le script doit etre appeller ce cette maniere :"
   echo 
-  echo -e "          tp.sh ${orange}[OPTIONS]${nocolor} -a [bucket | bucketSeuil | merge | mergeSeuil] -e path_vers_fichier_txt"
+  echo -e "          tp.sh ${orange}[OPTIONS]${nocolor} -a [vorace | progdyn | tabou] -e path_vers_fichier_de_bloques"
   echo
   echo -e "${orange}[OPTIONS]${nocolor} : "
   echo
-  echo -e "\t-p : Affiche les nombres tries\n\t-t : Affiche le temps d\'execution"
+  echo -e "\t-p : Affiche les informations des bloques de la solution (hauteur, largeur, pronfondeur)\n\t-t : Affiche le temps de execution"
 }
 	
 # Parse Arguments
@@ -144,13 +141,13 @@ do
 	help
     ;;
 	-p|-P)
-	printsortedlist=1
+	printtower=1
 	;;
 	-t|-T)
 	printtime=1
 	;;
     -a)
-	callsorting $2 $3 $4
+	buildtower $2 $3 $4
 	shift 3
 	;;
 	-all)
@@ -159,8 +156,11 @@ do
 	;;	
     #default
     *)
-    echo "NEED ARGUMENTS"
-    ;;    
+	echo
+    echo -e "${red}NEED ARGUMENTS"
+	echo -e "${red}Taper la commande ${nocolor}--help ${red}pour connaitre les choix des algorithmes disponibles${nocolor}"
+    exit
+	;;    
   esac
   shift
 done

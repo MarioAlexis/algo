@@ -14,10 +14,10 @@ public class VoraciousTowerBuilder {
 		int candidateChoice = 0;
 		int selectionCounter = 0;
 		int idx = 0;
-		//Puisque nous voulons une probabilit� de s�lection plus �lev�e en fontion de la surface effective 
-		//du bloc, nous allons g�n�rer un nombre al�atoire pour s�lectionner un bloc en fonction des surfaces
-		//cumul�es. (Les blocs sont d�j� ordonn�es en ordre croissant de surface) Ainsi, la probabilit�
-		//relative de chaque bloc correspond � l'aire de sa surface effective.		
+		//Puisque nous voulons une probabilite de selection plus elevee en fontion de la surface effective 
+		//du bloc, nous allons generer un nombre aleatoire pour selectionner un bloc en fonction des surfaces
+		//cumulees. (Les blocs sont deja ordonnes en ordre croissant de surface) Ainsi, la probabilite
+		//relative de chaque bloc correspond a l'aire de sa surface effective.		
 		while (list.size() > 0){
 			idx = 0;
 			cumulatedArea = 0;
@@ -25,10 +25,12 @@ public class VoraciousTowerBuilder {
 			for (Block b : list){
 				cumulatedArea+=b.area;
 			}
+			//On genere un nombre entre 1 et l'aire des surfaces effectives cumulees
 			candidateChoice = randomGenerator.nextInt(cumulatedArea);
 			if (candidateChoice == 0){
 				candidateChoice = 1;
 			}
+			//On verifie quel est le bloc correspondant
 			while (selectionCounter < candidateChoice){
 				selectionCounter += list.get(idx++).area;
 			}

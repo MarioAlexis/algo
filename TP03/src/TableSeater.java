@@ -1,16 +1,42 @@
-import java.util.Random;
 
 public class TableSeater {
 	public static void organize(Roster roster){
 		int round = 0;
 		Table selectedTable;
 		Corporation candidate;
-		Random randomGenerator = new Random();
+		double possibleScore=0;
+		int totalWeight = 0;
 		while(round!=2){
 			candidate = roster.getNextUnseatedCorporation();	
 			if(candidate!=null){
-				selectedTable = candidate.availableTables.get(randomGenerator.nextInt(candidate.availableTables.size()));
+				for (Table t : candidate.availableTables){
+					t.possibleWeight = totalWeight;
+					t.possibleDeviation=roster.getDeviation(candidate, t);
+					for (Corporation c: t.seatedCorps){
+						if (c.alliedCorps.contains(candidate)){
+							t.possibleWeight-=1;
+						} else {
+							if (c.adverseCorps.contains(candidate)){
+								t.possibleWeight+=1;
+							}
+						}
+					}
+				}
+				selectedTable = null;
+				for (Table t : candidate.availableTables){
+					if (selectedTable==null){
+						selectedTable=t;
+						possibleScore=(t.possibleDeviation*30)+t.possibleWeight;
+					} else {
+						if ((t.possibleDeviation*30)+t.possibleWeight<possibleScore){
+							selectedTable = t;
+						}
+					}
+				}
+				totalWeight = selectedTable.possibleWeight;
 				selectedTable.seatedCorps.add(candidate);
+				selectedTable.peopleSeated+=candidate.representativeCount;
+				roster.score=selectedTable.possibleDeviation + totalWeight;
 				for(Corporation c: roster.corporationsList){
 					if (c.enemyCorps.contains(candidate) || (round==0 && c.adverseCorps.contains(candidate))){
 						c.availableTables.remove(selectedTable);
@@ -23,5 +49,9 @@ public class TableSeater {
 				round++;
 			}
 		}
+		System.out.println(roster.getDeviation(null, null));
+		System.out.println(roster.score);
+		System.out.println(totalWeight);
 	}
+
 }

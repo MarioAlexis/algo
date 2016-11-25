@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Roster {
+	double score;
+	int deviation;
 	public List<Table> tablesList;
 	public List<Corporation> corporationsList;
 	public Roster(){
@@ -9,7 +11,7 @@ public class Roster {
 		corporationsList = new ArrayList<Corporation>();
 	}
 	public Corporation getNextUnseatedCorporation(){
-		Corporation nextCorp = null;
+		Corporation candidate = null;
 		for (Corporation c: corporationsList){
 			boolean isSeated = false;
 			for(Table t: tablesList){		
@@ -19,17 +21,13 @@ public class Roster {
 			}
 			if(!isSeated){
 				if (c.availableTables.size()>0){
-					if (nextCorp==null){
-						nextCorp = c;
-					} else {
-						if (c.availableTables.size() < nextCorp.availableTables.size()){
-							nextCorp = c;
-						}
-					}
+					if (candidate==null || (c.availableTables.size() < candidate.availableTables.size())){
+						candidate = c;
+					} 
 				}
 			}
 		}
-		return nextCorp;
+		return candidate;
 	}
 	public void updateAvailableTables() {
 		for(Corporation c1: corporationsList){
@@ -37,7 +35,7 @@ public class Roster {
 			c1.availableTables.clear();
 			for(Table t: tablesList){
 				for(Corporation c2 : t.seatedCorps){
-					if (c2==c1.enemyCorps){
+					if (c1.enemyCorps.contains(c2)){
 						haveEnemy = true;
 						break;
 					}
@@ -47,5 +45,26 @@ public class Roster {
 				}
 			}
 		}
+	}
+	public double getDeviation(Corporation c, Table selectedTable) {
+		double mean = 0;
+		double deviation=0;
+		for(Table t: tablesList){
+			if(t==selectedTable){
+				mean+=(t.peopleSeated+c.representativeCount);
+			} else {
+				mean+=t.peopleSeated;
+			}
+		}
+		mean = mean/tablesList.size();
+		for (Table t: tablesList){
+			if(t==selectedTable){
+				deviation+=(t.peopleSeated+c.representativeCount-mean)*(t.peopleSeated+c.representativeCount-mean);
+			} else {
+				deviation+=(t.peopleSeated-mean)*(t.peopleSeated-mean);
+			}
+		}
+		deviation = Math.sqrt(deviation/tablesList.size());
+		return deviation;
 	}
 }

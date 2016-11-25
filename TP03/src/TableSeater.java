@@ -1,11 +1,12 @@
 
 public class TableSeater {
+	final static int DEVIATION_MODIFIER=1;
 	public static void organize(Roster roster){
 		int round = 0;
 		Table selectedTable;
 		Corporation candidate;
 		double possibleScore=0;
-		int totalWeight = 0;
+		int totalWeight = 0;	
 		while(round!=2){
 			candidate = roster.getNextUnseatedCorporation();	
 			if(candidate!=null){
@@ -26,9 +27,9 @@ public class TableSeater {
 				for (Table t : candidate.availableTables){
 					if (selectedTable==null){
 						selectedTable=t;
-						possibleScore=(t.possibleDeviation*30)+t.possibleWeight;
+						possibleScore=(t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleWeight;
 					} else {
-						if ((t.possibleDeviation*30)+t.possibleWeight<possibleScore){
+						if ((t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleWeight<possibleScore){
 							selectedTable = t;
 						}
 					}
@@ -52,6 +53,5 @@ public class TableSeater {
 		System.out.println(roster.getDeviation(null, null));
 		System.out.println(roster.score);
 		System.out.println(totalWeight);
-	}
-
+	}	
 }

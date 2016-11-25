@@ -4,11 +4,17 @@ import java.util.List;
 public class Roster {
 	double score;
 	int deviation;
+	public List<int[]> enemyPairs;
+	public List<int[]> friendPairs;
+	public List<int[]> notFriendPairs;
 	public List<Table> tablesList;
 	public List<Corporation> corporationsList;
 	public Roster(){
 		tablesList = new ArrayList<Table>();
 		corporationsList = new ArrayList<Corporation>();
+		enemyPairs = new ArrayList<int[]>();
+		friendPairs = new ArrayList<int[]>();
+		notFriendPairs = new ArrayList<int[]>();
 	}
 	public Corporation getNextUnseatedCorporation(){
 		Corporation candidate = null;

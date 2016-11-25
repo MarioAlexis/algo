@@ -34,6 +34,7 @@ public class RosterFactory {
 		    	String [] sData = line.split("\\s+");
 		    	roster.corporationsList.get(Integer.parseInt(sData[0])).enemyCorps.add(roster.corporationsList.get(Integer.parseInt(sData[1])));
 		    	roster.corporationsList.get(Integer.parseInt(sData[1])).enemyCorps.add(roster.corporationsList.get(Integer.parseInt(sData[0])));
+		    	roster.enemyPairs.add(new int[]{Integer.parseInt(sData[0]),Integer.parseInt(sData[1])});
 		    }
 		    line = br.readLine();
 			pairsCount =  Integer.parseInt(line);
@@ -42,6 +43,7 @@ public class RosterFactory {
 		    	String [] sData = line.split("\\s+");
 		    	roster.corporationsList.get(Integer.parseInt(sData[0])).alliedCorps.add(roster.corporationsList.get(Integer.parseInt(sData[1])));
 		    	roster.corporationsList.get(Integer.parseInt(sData[1])).alliedCorps.add(roster.corporationsList.get(Integer.parseInt(sData[0])));
+		    	roster.friendPairs.add(new int[]{Integer.parseInt(sData[0]),Integer.parseInt(sData[1])});
 		    }
 		    line = br.readLine();
 			pairsCount =  Integer.parseInt(line);
@@ -50,6 +52,7 @@ public class RosterFactory {
 		    	String [] sData = line.split("\\s+");
 		    	roster.corporationsList.get(Integer.parseInt(sData[0])).adverseCorps.add(roster.corporationsList.get(Integer.parseInt(sData[1])));
 		    	roster.corporationsList.get(Integer.parseInt(sData[1])).adverseCorps.add(roster.corporationsList.get(Integer.parseInt(sData[0])));
+		    	roster.notFriendPairs.add(new int[]{Integer.parseInt(sData[0]),Integer.parseInt(sData[1])});
 		    }
 		    for (Corporation c: roster.corporationsList){
 		    	for (Table t: roster.tablesList){

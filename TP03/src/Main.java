@@ -3,41 +3,64 @@ import java.util.Random;
 public class Main {
 	public static void main(String[] args)
 	{
+		double INIT_TEMP = 20.0f;
+		int tempCnt = 1;
 		Roster currentSolution = RosterFactory.createRoster("Files/160_3_0.6.1");
+		Roster bestSolution = hardCopyRoster(currentSolution);
 		Random rand = new Random();
-		double start, end;
-		double initTemp = 50.0f;
+		double start;
+		double temp = INIT_TEMP;
 		start = (double)System.nanoTime();
-		Roster bestSolution = new Roster();
+		
 		TableSeater.organize(currentSolution);
-		double currentSolutionWeigh = currentSolution.score;
-		while(true)
-		{
-			Roster neighborSolution = HardCopyRoster(currentSolution);
-			/*
-			 * Switch Candidat here
-			 */
-			double neighborSolutionWeigh = neighborSolution.score;
-			double cost = currentSolutionWeigh - neighborSolutionWeigh;
-			if(accept(cost, initTemp) > rand.nextDouble())
-			{
-				
-			}
-			
-
-			verifySolution(CurrentSolution);
+		while(!verifySolution(currentSolution)){
+			currentSolution = bestSolution;
 		}
+		bestSolution = currentSolution;
+		printSolution(bestSolution);
+		while(((double)System.nanoTime() - start)/1000000000.0f < (60*3)){
+			if (temp == 0){
+				tempCnt++;
+				temp = INIT_TEMP*tempCnt;
+				System.out.println("TEMP x 2!!!!");
+				System.out.println("TEMP x 2!!!!");
+				System.out.println("TEMP x 2!!!!");
+				System.out.println("TEMP x 2!!!!");
+				System.out.println("TEMP x 2!!!!");
+				break;
+			}
+			Roster neighborSolution = hardCopyRoster(currentSolution);
+			MovementInducer.moveCorporation(neighborSolution);
+			if(verifySolution(neighborSolution)){
+				double cost = (-1*neighborSolution.score) - (-1*currentSolution.score);
+				if(accept(cost, temp) > rand.nextDouble()){
+					currentSolution = neighborSolution;
+					System.out.println("New current Solution with score= " + currentSolution.score);
+					if(currentSolution.score < bestSolution.score){
+						bestSolution = currentSolution;
+						printSolution(bestSolution);
+					}
+				} else {
+					System.out.println("No accept");
+				}		
+				temp-=0.01;
+			} else {
+				System.out.print("fuck");
+			}
+		}
+		
 	}
 	
 	public static boolean verifySolution(Roster roster){
 		int corpTotal = 0;
-		int score = 0;
+		double score = 0;
 		Corporation c1;
 		Corporation c2;
 		for (Table t : roster.tablesList){
 			corpTotal+=t.seatedCorps.size();
 		}
 		if(corpTotal!=roster.corporationsList.size()){
+			System.out.println("not everyone is seated");
 			return false;
 		}
 		for (Table t : roster.tablesList){
@@ -45,6 +68,7 @@ public class Main {
 				c1=roster.corporationsList.get(roster.enemyPairs.get(i)[0]);
 				c2=roster.corporationsList.get(roster.enemyPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
+					System.out.println("enemies on the same table");
 					return false;
 				}
 			}
@@ -67,8 +91,11 @@ public class Main {
 				}
 			}
 		}
-		if(score != roster.score)
-			return false;
+		score = score + roster.getDeviation(null, null);
+/*		if(score != roster.score){
+			System.out.println("score not equal");
+			return false;	
+		}*/
 		
 		return true;
 	}
@@ -90,28 +117,33 @@ public class Main {
 		System.out.println("fin");
 	}
 	
-	static public Roster HardCopyRoster(Roster toCopy)
+	static public Roster hardCopyRoster(Roster toCopy)
 	{
 		// friends copy
 		Roster toReturn = new Roster();
-		for(int i=0; i < toCopy.friendPairs.size(); i++)
+/*		for(int i=0; i < toCopy.friendPairs.size(); i++)
 		{
 			toReturn.friendPairs.add(toCopy.notFriendPairs.get(i));
-		}
+		}*/
+		toReturn.friendPairs = toCopy.friendPairs;
 		
 		// no friends copy
-		for(int i=0; i < toCopy.notFriendPairs.size(); i++)
+/*		for(int i=0; i < toCopy.notFriendPairs.size(); i++)
 		{
 			toReturn.notFriendPairs.add(toCopy.notFriendPairs.get(i));
-		}
+		}*/
+		toReturn.notFriendPairs = toCopy.notFriendPairs;
 		
 		// enemy copy
-		for(int i=0; i < toCopy.enemyPairs.size(); i++)
+/*		for(int i=0; i < toCopy.enemyPairs.size(); i++)
 		{
 			toReturn.enemyPairs.add(toCopy.enemyPairs.get(i));
-		}
+		}*/
+		toReturn.enemyPairs = toCopy.enemyPairs;
 		
 		// tables copy
+		toReturn.corporationsList = toCopy.corporationsList;
+		
 		for(int i=0; i < toCopy.tablesList.size(); i++)
 		{
 			toReturn.tablesList.add(new Table());

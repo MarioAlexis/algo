@@ -1,26 +1,71 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MovementInducer {
-	private static Random rand = new Random();
-	private static Corporation candidate;
-	private static Table currentTable;
-	private static Table selectedTable;
+	static Random rand = new Random();
+	static List<Corporation> candidates = new ArrayList<Corporation>();
+	static Table currentTable;
+    static Table selectedTable;
+    static Corporation c1;
+    static Corporation c2;
+    static Table t1;
+    static Table t2;
+    static boolean sameTable = true;
+    static boolean notEnoughTables = false;
 	static public void moveCorporation(Roster solution)
 	{
-		solution.updateAvailableTables();
-		candidate = solution.corporationsList.get(rand.nextInt(solution.corporationsList.size()));
-		for (Table t : solution.tablesList){
-			if (t.seatedCorps.contains(candidate)){
-				currentTable = t;
-				break;
+		sameTable = true;
+		notEnoughTables = true;
+		solution.updateAvailableTablesNoAdverse();
+		for (Corporation c: solution.corporationsList){
+			if (c.availableTables.size() > 1){
+				candidates.add(c);
 			}
 		}
-		selectedTable = candidate.availableTables.get(rand.nextInt(candidate.availableTables.size()));
-		while (selectedTable==currentTable){
-			selectedTable = candidate.availableTables.get(rand.nextInt(candidate.availableTables.size()));
+		c1 = candidates.get(rand.nextInt(candidates.size()));
+		while (sameTable){
+			c2 = candidates.get(rand.nextInt(candidates.size()));
+			for (Table t: solution.tablesList){
+				if (!(t.seatedCorps.contains(c1) && t.seatedCorps.contains(c2))){
+					sameTable = false;
+				}
+			}
 		}
-		currentTable.seatedCorps.remove(candidate);
-		selectedTable.seatedCorps.add(candidate);
+		for (Table t: solution.tablesList){
+			if(t.seatedCorps.contains(c1)){
+				t1 = t;
+			}
+			if(t.seatedCorps.contains(c2)){
+				t2 = t;
+			}
+		}
+		t1.seatedCorps.remove(c1);
+		t1.peopleSeated-=c1.representativeCount;
+		t2.seatedCorps.remove(c2);
+		t2.peopleSeated-=c2.representativeCount;
+		solution.updateAvailableTablesNoAdverse();
+		if (c1.availableTables.contains(t2) && c2.availableTables.contains(t1)){
+			t2.seatedCorps.add(c1);
+			t2.peopleSeated+=c1.representativeCount;
+			t1.seatedCorps.add(c2);
+			t1.peopleSeated+=c2.representativeCount;
+		} else {
+			t1 = c1.availableTables.get(rand.nextInt(c1.availableTables.size()));
+			t1.seatedCorps.add(c1);
+			t1.peopleSeated+=c1.representativeCount;
+			if (c1.enemyCorps.contains(c2)){
+				for(Table t: c2.availableTables){
+					if(t.seatedCorps.contains(c1)){
+						c2.availableTables.remove(t);
+						break;
+					}
+				}
+			}
+			t2 = c2.availableTables.get(rand.nextInt(c2.availableTables.size()));
+			t2.seatedCorps.add(c2);
+			t2.peopleSeated+=c2.representativeCount;
+		}
 		solution.updateScore();
 	}
 }

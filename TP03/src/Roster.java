@@ -60,8 +60,27 @@ public class Roster {
 			boolean haveEnemy = false;
 			c1.availableTables.clear();
 			for(Table t: tablesList){
+				haveEnemy = false;
 				for(Corporation c2 : t.seatedCorps){
 					if (c1.enemyCorps.contains(c2)){
+						haveEnemy = true;
+						break;
+					}
+				}
+				if(!haveEnemy){
+					c1.availableTables.add(t);
+				}
+			}
+		}
+	}
+	public void updateAvailableTablesNoAdverse(){
+		for(Corporation c1: corporationsList){
+			boolean haveEnemy = false;
+			c1.availableTables.clear();
+			for(Table t: tablesList){
+				haveEnemy = false;
+				for(Corporation c2 : t.seatedCorps){
+					if (c1.enemyCorps.contains(c2) || c1.adverseCorps.contains(c2)){
 						haveEnemy = true;
 						break;
 					}
@@ -104,7 +123,7 @@ public class Roster {
 				c1=corporationsList.get(friendPairs.get(i)[0]);
 				c2=corporationsList.get(friendPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					score--;
+					scoreCheck--;
 				}
 			}
 		}
@@ -113,7 +132,7 @@ public class Roster {
 				c1=corporationsList.get(notFriendPairs.get(i)[0]);
 				c2=corporationsList.get(notFriendPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					score++;
+					scoreCheck++;
 				}
 			}
 		}

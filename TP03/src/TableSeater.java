@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class TableSeater {
 	final static int DEVIATION_MODIFIER=1;
@@ -7,6 +10,8 @@ public class TableSeater {
 		Corporation candidate;
 		double possibleScore=0;
 		int totalWeight = 0;	
+		Random rand = new Random();
+		List <Table> candidateTables = new ArrayList<Table>();
 		while(round!=2){
 			candidate = roster.getNextUnseatedCorporation();	
 			if(candidate!=null){
@@ -34,6 +39,13 @@ public class TableSeater {
 						}
 					}
 				}
+				candidateTables.clear();
+				for (Table t : candidate.availableTables){
+					if ((t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleWeight == (selectedTable.possibleDeviation*DEVIATION_MODIFIER) + selectedTable.possibleWeight){
+							candidateTables.add(t);
+					}
+				}
+				selectedTable = candidateTables.get(rand.nextInt(candidateTables.size()));
 				totalWeight = selectedTable.possibleWeight;
 				selectedTable.seatedCorps.add(candidate);
 				selectedTable.peopleSeated+=candidate.representativeCount;

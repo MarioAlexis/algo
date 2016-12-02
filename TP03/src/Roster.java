@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Roster {
 	double score;
@@ -17,7 +18,8 @@ public class Roster {
 		notFriendPairs = new ArrayList<int[]>();
 	}
 	public Corporation getNextUnseatedCorporation(){
-		Corporation candidate = null;
+		Corporation currentCandidate = null;
+		List<Corporation> candidates = new ArrayList<Corporation>();
 		for (Corporation c: corporationsList){
 			boolean isSeated = false;
 			for(Table t: tablesList){		
@@ -27,13 +29,31 @@ public class Roster {
 			}
 			if(!isSeated){
 				if (c.availableTables.size()>0){
-					if (candidate==null || (c.availableTables.size() < candidate.availableTables.size())){
-						candidate = c;
+					if (currentCandidate==null || (c.availableTables.size() < currentCandidate.availableTables.size())){
+						currentCandidate = c;
 					} 
 				}
 			}
 		}
-		return candidate;
+		for (Corporation c: corporationsList){
+			boolean isSeated = false;
+			for(Table t: tablesList){		
+				if(t.seatedCorps.contains(c)){
+					isSeated = true;
+				}
+			}
+			if(!isSeated){
+				if (c.availableTables.size() == currentCandidate.availableTables.size()){
+					candidates.add(c);
+				}
+			}
+		}
+		Random rand = new Random();
+		if (candidates.size()==0){
+			return null;
+		} else {
+			return candidates.get(rand.nextInt(candidates.size()));
+		}	
 	}
 	public void updateAvailableTables() {
 		for(Corporation c1: corporationsList){

@@ -1,7 +1,7 @@
 
 public class Main {
 	public static void main(String[] args){
-		Roster roster = RosterFactory.createRoster("C:/Users/h3/workspace/INF4705_Lab3/src/160_3_0.6.1");
+		Roster roster = RosterFactory.createRoster("Files/160_3_0.6.1");
 		TableSeater.organize(roster);
 		for (Table t: roster.tablesList){
 			String s = "";

@@ -93,4 +93,30 @@ public class Roster {
 		deviation = Math.sqrt(deviation/tablesList.size());
 		return deviation;
 	}
+	
+	public void updateScore(){
+		double deviation = getDeviation(null, null);
+		double scoreCheck = deviation;
+		Corporation c1;
+		Corporation c2;
+		for (Table t : tablesList){
+			for (int i = 0; i<friendPairs.size(); i++){
+				c1=corporationsList.get(friendPairs.get(i)[0]);
+				c2=corporationsList.get(friendPairs.get(i)[1]);
+				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
+					score--;
+				}
+			}
+		}
+		for (Table t : tablesList){
+			for (int i = 0; i<notFriendPairs.size(); i++){
+				c1=corporationsList.get(notFriendPairs.get(i)[0]);
+				c2=corporationsList.get(notFriendPairs.get(i)[1]);
+				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
+					score++;
+				}
+			}
+		}
+		this.score = scoreCheck;
+	}
 }

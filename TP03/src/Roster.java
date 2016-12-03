@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Roster {
 	double score;
+	int totalWeight = 0;
 	int deviation;
 	public List<int[]> enemyPairs;
 	public List<int[]> friendPairs;
@@ -115,7 +116,7 @@ public class Roster {
 	
 	public void updateScore(){
 		double deviation = getDeviation(null, null);
-		double scoreCheck = deviation;
+		int weight = 0;
 		Corporation c1;
 		Corporation c2;
 		for (Table t : tablesList){
@@ -123,7 +124,7 @@ public class Roster {
 				c1=corporationsList.get(friendPairs.get(i)[0]);
 				c2=corporationsList.get(friendPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					scoreCheck--;
+					weight--;
 				}
 			}
 		}
@@ -132,10 +133,11 @@ public class Roster {
 				c1=corporationsList.get(notFriendPairs.get(i)[0]);
 				c2=corporationsList.get(notFriendPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					scoreCheck++;
+					weight++;
 				}
 			}
 		}
-		this.score = scoreCheck;
+		this.totalWeight = weight;
+		this.score = weight+deviation;
 	}
 }

@@ -41,7 +41,6 @@ function buildtower()
 	choice=0
 	lettre="$2"
 	pathtxt="$3"
-	pathtxt=${pathtxt:4}
 	echo
 	cd src/
 	javac -Xlint Main.java
@@ -69,7 +68,7 @@ function buildtower()
 		;;
 	esac
 	checklettre $lettre
-	echo -e "${orange}Demarrge de l'algorithme ${cyan}${choicearg} ${orange}de la liste de bloques ${cyan}${pathtxt}${nocolor}"	
+	echo -e "${orange}Demarrge de l'algorithme ${cyan}${choicearg} ${orange}de la liste de bloques ${cyan}$(basename "$pathtxt")${nocolor}"	
 	echo
 	java Main $printtower $printtime $choice $pathtxt
 	seuilerror $?

@@ -6,29 +6,21 @@ public class Main {
 	{
 		Roster currentSolution = RosterFactory.createRoster("Files/160_3_0.6.1");
 		Random rand = new Random();
-		long temp = System.nanoTime() + TimeUnit.MINUTES.toNanos(3);
+		long temperature = System.nanoTime() + TimeUnit.MINUTES.toNanos(3);
 		TableSeater.organize(currentSolution);
-	    if(!verifySolution(currentSolution)){
-	    	System.out.println("Failed.");
-	    	return;
-		}
 		Roster bestSolution = hardCopyRoster(currentSolution);
 		bestSolution.updateScore();
 		printSolution(bestSolution);
-		while(temp >= FROZEN_STATE()){
+		while(temperature >= FROZEN_STATE()){
 			Roster neighborSolution = hardCopyRoster(currentSolution);
 			MovementInducer.moveSolution(neighborSolution);
-			if(verifySolution(neighborSolution)){
-				double cost = (-1*neighborSolution.score) - (-1*currentSolution.score);
-				if(accept(cost, temp) > rand.nextDouble()){
-					currentSolution = neighborSolution;
-					//System.out.println("New current Solution with score= " + currentSolution.score);
-					if(currentSolution.score < bestSolution.score){
-						bestSolution = currentSolution;
-						printSolution(bestSolution);
-					}
-				} else {
-					System.out.println("No accept");
+			double cost = (-1*neighborSolution.score) - (-1*currentSolution.score);
+			if(accept(cost, temperature) > rand.nextDouble()){
+				currentSolution = neighborSolution;
+				//System.out.println("New current Solution with score= " + currentSolution.score);
+				if(currentSolution.score < bestSolution.score){
+					bestSolution = currentSolution;
+					printSolution(bestSolution);
 				}
 			} 
 		}

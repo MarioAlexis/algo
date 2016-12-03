@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Table {
 	public double possibleDeviation;
-	public int possibleWeight;
+	public int possibleInducedWeight;
 	public Integer peopleSeated = 0;
 	public List<Corporation> seatedCorps;
 	public Table(){

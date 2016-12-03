@@ -1,26 +1,25 @@
+
 import java.util.Random;
 
 public class MovementInducer {
-	private static Random rand = new Random();
-	private static Corporation candidate;
-	private static Table currentTable;
-	private static Table selectedTable;
-	static public void moveCorporation(Roster solution)
+	static Random rand = new Random();
+	static final double PERCENTAGE = 0.25;
+	static public void moveSolution(Roster solution)
 	{
+		Corporation removedCandidate = null;
+		for (Table t: solution.tablesList){
+			int removeCount = (int)Math.floor(t.seatedCorps.size());
+			for (int i = 0; i < removeCount; i++){
+				if (t.seatedCorps.size()>0){
+					removedCandidate = t.seatedCorps.get(rand.nextInt(t.seatedCorps.size()));
+					t.seatedCorps.remove(removedCandidate);
+					t.peopleSeated-=removedCandidate.representativeCount;
+				}
+			}		
+		}	
 		solution.updateAvailableTables();
-		candidate = solution.corporationsList.get(rand.nextInt(solution.corporationsList.size()));
-		for (Table t : solution.tablesList){
-			if (t.seatedCorps.contains(candidate)){
-				currentTable = t;
-				break;
-			}
-		}
-		selectedTable = candidate.availableTables.get(rand.nextInt(candidate.availableTables.size()));
-		while (selectedTable==currentTable){
-			selectedTable = candidate.availableTables.get(rand.nextInt(candidate.availableTables.size()));
-		}
-		currentTable.seatedCorps.remove(candidate);
-		selectedTable.seatedCorps.add(candidate);
 		solution.updateScore();
+		TableSeater.organize(solution);	
+		//solution.updateScore();
 	}
 }

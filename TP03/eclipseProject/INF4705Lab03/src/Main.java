@@ -1,43 +1,50 @@
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 	public static void main(String[] args)
 	{
 		Roster currentSolution = RosterFactory.createRoster("Files/160_3_0.6.1");
 		Random rand = new Random();
-		double start, end;
-		double initTemp = 50.0f;
-		start = (double)System.nanoTime();
-		Roster bestSolution = new Roster();
+		long temp = System.nanoTime() + TimeUnit.MINUTES.toNanos(3);
 		TableSeater.organize(currentSolution);
-		double currentSolutionWeigh = currentSolution.score;
-		while(true)
-		{
-			Roster neighborSolution = HardCopyRoster(currentSolution);
-			/*
-			 * Switch Candidat here
-			 */
-			double neighborSolutionWeigh = neighborSolution.score;
-			double cost = currentSolutionWeigh - neighborSolutionWeigh;
-			if(accept(cost, initTemp) > rand.nextDouble())
-			{
-				
-			}
-			
-
-			verifySolution(CurrentSolution);
+	    if(!verifySolution(currentSolution)){
+	    	System.out.println("Failed.");
+	    	return;
+		}
+		Roster bestSolution = hardCopyRoster(currentSolution);
+		bestSolution.updateScore();
+		printSolution(bestSolution);
+		while(temp >= FROZEN_STATE()){
+			Roster neighborSolution = hardCopyRoster(currentSolution);
+			MovementInducer.moveSolution(neighborSolution);
+			if(verifySolution(neighborSolution)){
+				double cost = (-1*neighborSolution.score) - (-1*currentSolution.score);
+				if(accept(cost, temp) > rand.nextDouble()){
+					currentSolution = neighborSolution;
+					//System.out.println("New current Solution with score= " + currentSolution.score);
+					if(currentSolution.score < bestSolution.score){
+						bestSolution = currentSolution;
+						printSolution(bestSolution);
+					}
+				} else {
+					System.out.println("No accept");
+				}
+			} 
 		}
 	}
 	
 	public static boolean verifySolution(Roster roster){
 		int corpTotal = 0;
-		int score = 0;
+		int weight = 0;
+		double score = 0;
 		Corporation c1;
 		Corporation c2;
 		for (Table t : roster.tablesList){
 			corpTotal+=t.seatedCorps.size();
 		}
 		if(corpTotal!=roster.corporationsList.size()){
+			System.out.println("Not everyone is seated");
 			return false;
 		}
 		for (Table t : roster.tablesList){
@@ -45,6 +52,7 @@ public class Main {
 				c1=roster.corporationsList.get(roster.enemyPairs.get(i)[0]);
 				c2=roster.corporationsList.get(roster.enemyPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
+					System.out.println("Enemies on the same table");
 					return false;
 				}
 			}
@@ -54,7 +62,7 @@ public class Main {
 				c1=roster.corporationsList.get(roster.friendPairs.get(i)[0]);
 				c2=roster.corporationsList.get(roster.friendPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					score--;
+					weight--;
 				}
 			}
 		}
@@ -63,23 +71,33 @@ public class Main {
 				c1=roster.corporationsList.get(roster.notFriendPairs.get(i)[0]);
 				c2=roster.corporationsList.get(roster.notFriendPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					score++;
+					weight++;
 				}
 			}
 		}
-		if(score != roster.score)
-			return false;
+		//roster.totalWeight = weight;
+		score = weight + roster.getDeviation(null, null);
+		if(score != roster.score){
+			System.out.println("Score not equal");
+			return false;	
+		}
 		
 		return true;
 	}
 	
 	static public double accept(double cost, double temperature)
 	{
-		return Math.min(1.0f, Math.exp(-(cost/temperature)));
+		return Math.min(1.0, Math.exp(-(cost/temperature)));
+	}
+	
+	static public long FROZEN_STATE()
+	{
+		return System.nanoTime();
 	}
 	
 	static public void printSolution(Roster solution)
 	{
+		System.out.println("New optimum found with score=" + solution.score);
 		for (Table t: solution.tablesList){
 			String s = "";
 			for (Corporation c: t.seatedCorps){
@@ -90,36 +108,44 @@ public class Main {
 		System.out.println("fin");
 	}
 	
-	static public Roster HardCopyRoster(Roster toCopy)
+	static public Roster hardCopyRoster(Roster toCopy)
 	{
 		// friends copy
 		Roster toReturn = new Roster();
-		for(int i=0; i < toCopy.friendPairs.size(); i++)
+		
+		toReturn.totalWeight = toCopy.totalWeight;
+/*		for(int i=0; i < toCopy.friendPairs.size(); i++)
 		{
 			toReturn.friendPairs.add(toCopy.notFriendPairs.get(i));
-		}
+		}*/
+		toReturn.friendPairs = toCopy.friendPairs;
 		
 		// no friends copy
-		for(int i=0; i < toCopy.notFriendPairs.size(); i++)
+/*		for(int i=0; i < toCopy.notFriendPairs.size(); i++)
 		{
 			toReturn.notFriendPairs.add(toCopy.notFriendPairs.get(i));
-		}
+		}*/
+		toReturn.notFriendPairs = toCopy.notFriendPairs;
 		
 		// enemy copy
-		for(int i=0; i < toCopy.enemyPairs.size(); i++)
+/*		for(int i=0; i < toCopy.enemyPairs.size(); i++)
 		{
 			toReturn.enemyPairs.add(toCopy.enemyPairs.get(i));
-		}
+		}*/
+		toReturn.enemyPairs = toCopy.enemyPairs;
 		
 		// tables copy
+		toReturn.corporationsList = toCopy.corporationsList;
+		
 		for(int i=0; i < toCopy.tablesList.size(); i++)
 		{
-			toReturn.tablesList.add(new Table());
-			toReturn.tablesList.get(i).peopleSeated = toCopy.tablesList.get(i).peopleSeated;
+			toReturn.tablesList.add(new Table()); 
+			toReturn.tablesList.get(i).peopleSeated = 0;
 			
 			for(int j=0; j < toCopy.tablesList.get(i).seatedCorps.size(); j++)
 			{
 				toReturn.tablesList.get(i).seatedCorps.add(toCopy.tablesList.get(i).seatedCorps.get(j));
+				toReturn.tablesList.get(i).peopleSeated+=toCopy.tablesList.get(i).seatedCorps.get(j).representativeCount;
 			}
 		}
 		

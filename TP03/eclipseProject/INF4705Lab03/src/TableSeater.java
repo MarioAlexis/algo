@@ -9,21 +9,21 @@ public class TableSeater {
 		Table selectedTable;
 		Corporation candidate;
 		double possibleScore=0;
-		int totalWeight = 0;	
+		int totalWeight = roster.totalWeight;	
 		Random rand = new Random();
 		List <Table> candidateTables = new ArrayList<Table>();
 		while(round!=2){
 			candidate = roster.getNextUnseatedCorporation();	
 			if(candidate!=null){
 				for (Table t : candidate.availableTables){
-					t.possibleWeight = totalWeight;
+					t.possibleInducedWeight = totalWeight;
 					t.possibleDeviation=roster.getDeviation(candidate, t);
 					for (Corporation c: t.seatedCorps){
 						if (c.alliedCorps.contains(candidate)){
-							t.possibleWeight-=1;
+							t.possibleInducedWeight-=1;
 						} else {
 							if (c.adverseCorps.contains(candidate)){
-								t.possibleWeight+=1;
+								t.possibleInducedWeight+=1;
 							}
 						}
 					}
@@ -32,24 +32,25 @@ public class TableSeater {
 				for (Table t : candidate.availableTables){
 					if (selectedTable==null){
 						selectedTable=t;
-						possibleScore=(t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleWeight;
+						possibleScore=(t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleInducedWeight;
 					} else {
-						if ((t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleWeight<possibleScore){
+						if ((t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleInducedWeight<possibleScore){
 							selectedTable = t;
 						}
 					}
 				}
 				candidateTables.clear();
 				for (Table t : candidate.availableTables){
-					if ((t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleWeight == (selectedTable.possibleDeviation*DEVIATION_MODIFIER) + selectedTable.possibleWeight){
+					if ((t.possibleDeviation*DEVIATION_MODIFIER)+t.possibleInducedWeight == (selectedTable.possibleDeviation*DEVIATION_MODIFIER) + selectedTable.possibleInducedWeight){
 							candidateTables.add(t);
 					}
 				}
 				selectedTable = candidateTables.get(rand.nextInt(candidateTables.size()));
-				totalWeight = selectedTable.possibleWeight;
+				totalWeight = selectedTable.possibleInducedWeight;
 				selectedTable.seatedCorps.add(candidate);
 				selectedTable.peopleSeated+=candidate.representativeCount;
 				roster.score=selectedTable.possibleDeviation + totalWeight;
+				roster.totalWeight = totalWeight;
 				for(Corporation c: roster.corporationsList){
 					if (c.enemyCorps.contains(candidate) || (round==0 && c.adverseCorps.contains(candidate))){
 						c.availableTables.remove(selectedTable);
@@ -62,8 +63,8 @@ public class TableSeater {
 				round++;
 			}
 		}
-		System.out.println(roster.getDeviation(null, null));
-		System.out.println(roster.score);
-		System.out.println(totalWeight);
+		//System.out.println(roster.getDeviation(null, null));
+		//System.out.println(roster.score);
+		//System.out.println(totalWeight);
 	}	
 }

@@ -1,16 +1,12 @@
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 	public static void main(String[] args)
 	{
-		double INIT_TEMP = 200.0f;
-		int tempCnt = 1;
 		Roster currentSolution = RosterFactory.createRoster("Files/160_3_0.6.1");
-		
 		Random rand = new Random();
-		double start;
-		double temp = INIT_TEMP;
-		start = (double)System.nanoTime();
+		long temp = System.nanoTime() + TimeUnit.MINUTES.toNanos(3);
 		TableSeater.organize(currentSolution);
 	    if(!verifySolution(currentSolution)){
 	    	System.out.println("Failed.");
@@ -19,35 +15,23 @@ public class Main {
 		Roster bestSolution = hardCopyRoster(currentSolution);
 		bestSolution.updateScore();
 		printSolution(bestSolution);
-		while(((double)System.nanoTime() - start)/1000000000.0f < (60*3)){
-			if (temp == 0){
-				tempCnt++;
-				temp = INIT_TEMP*tempCnt;
-				System.out.println("TEMP x 2!!!!");
-				System.out.println("TEMP x 2!!!!");
-				System.out.println("TEMP x 2!!!!");
-				System.out.println("TEMP x 2!!!!");
-				System.out.println("TEMP x 2!!!!");
-				break;
-			}
+		while(temp >= FROZEN_STATE()){
 			Roster neighborSolution = hardCopyRoster(currentSolution);
 			MovementInducer.moveSolution(neighborSolution);
 			if(verifySolution(neighborSolution)){
 				double cost = (-1*neighborSolution.score) - (-1*currentSolution.score);
 				if(accept(cost, temp) > rand.nextDouble()){
 					currentSolution = neighborSolution;
-					System.out.println("New current Solution with score= " + currentSolution.score);
+					//System.out.println("New current Solution with score= " + currentSolution.score);
 					if(currentSolution.score < bestSolution.score){
 						bestSolution = currentSolution;
 						printSolution(bestSolution);
 					}
 				} else {
 					System.out.println("No accept");
-				}		
-				temp-=0.05;
+				}
 			} 
 		}
-		
 	}
 	
 	public static boolean verifySolution(Roster roster){
@@ -103,7 +87,12 @@ public class Main {
 	
 	static public double accept(double cost, double temperature)
 	{
-		return Math.min(1.0f, Math.exp(-(cost/temperature)));
+		return Math.min(1.0, Math.exp(-(cost/temperature)));
+	}
+	
+	static public long FROZEN_STATE()
+	{
+		return System.nanoTime();
 	}
 	
 	static public void printSolution(Roster solution)

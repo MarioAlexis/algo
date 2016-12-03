@@ -44,9 +44,7 @@ public class Main {
 					System.out.println("No accept");
 				}		
 				temp-=0.01;
-			} else {
-				System.out.print("fuck");
-			}
+			} 
 		}
 		
 	}
@@ -60,7 +58,7 @@ public class Main {
 			corpTotal+=t.seatedCorps.size();
 		}
 		if(corpTotal!=roster.corporationsList.size()){
-			System.out.println("not everyone is seated");
+			System.out.println("Not everyone is seated");
 			return false;
 		}
 		for (Table t : roster.tablesList){
@@ -68,7 +66,7 @@ public class Main {
 				c1=roster.corporationsList.get(roster.enemyPairs.get(i)[0]);
 				c2=roster.corporationsList.get(roster.enemyPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					System.out.println("enemies on the same table");
+					System.out.println("Enemies on the same table");
 					return false;
 				}
 			}
@@ -146,12 +144,13 @@ public class Main {
 		
 		for(int i=0; i < toCopy.tablesList.size(); i++)
 		{
-			toReturn.tablesList.add(new Table());
-			toReturn.tablesList.get(i).peopleSeated = toCopy.tablesList.get(i).peopleSeated;
+			toReturn.tablesList.add(new Table()); 
+			toReturn.tablesList.get(i).peopleSeated = 0;
 			
 			for(int j=0; j < toCopy.tablesList.get(i).seatedCorps.size(); j++)
 			{
 				toReturn.tablesList.get(i).seatedCorps.add(toCopy.tablesList.get(i).seatedCorps.get(j));
+				toReturn.tablesList.get(i).peopleSeated+=toCopy.tablesList.get(i).seatedCorps.get(j).representativeCount;
 			}
 		}
 		

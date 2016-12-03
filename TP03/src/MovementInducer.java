@@ -9,13 +9,44 @@ public class MovementInducer {
     static Table selectedTable;
     static Corporation c1;
     static Corporation c2;
-    static Table t1;
-    static Table t2;
+    static Table t1 = null;
+    static Table t2 = null;
     static boolean sameTable = true;
     static boolean notEnoughTables = false;
 	static public void moveCorporation(Roster solution)
 	{
-		sameTable = true;
+		solution.updateAvailableTablesNoAdverse();
+		for (Corporation c: solution.corporationsList){
+			if (c.availableTables.size() > 1){
+				candidates.add(c);
+			}
+		}
+		if (candidates.size()<=1){
+			solution.updateAvailableTables();
+		}
+		for (Corporation c: solution.corporationsList){
+			if (c.availableTables.size() > 1){
+				candidates.add(c);
+			}
+		}
+		c1 = candidates.get(rand.nextInt(candidates.size()));
+		for (Table t: solution.tablesList){
+			if(t.seatedCorps.contains(c1)){
+				t1 = t;
+				break;
+			}
+		}
+		t1.seatedCorps.remove(c1);
+		t1.peopleSeated-=c1.representativeCount;
+		t2 = c1.availableTables.get(rand.nextInt(c1.availableTables.size()));
+		while (t1==t2){
+			t2 = c1.availableTables.get(rand.nextInt(c1.availableTables.size()));
+			System.out.println("available tables size="+c1.availableTables.size());
+		}
+		t2.seatedCorps.add(c1);
+		t2.peopleSeated+=c1.representativeCount;
+
+		/*sameTable = true;
 		notEnoughTables = true;
 		solution.updateAvailableTablesNoAdverse();
 		for (Corporation c: solution.corporationsList){
@@ -65,7 +96,7 @@ public class MovementInducer {
 			t2 = c2.availableTables.get(rand.nextInt(c2.availableTables.size()));
 			t2.seatedCorps.add(c2);
 			t2.peopleSeated+=c2.representativeCount;
-		}
+		}*/
 		solution.updateScore();
 	}
 }

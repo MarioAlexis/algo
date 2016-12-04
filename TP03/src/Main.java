@@ -2,27 +2,46 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+	static final double FROZEN_STATE= 0.0;
+	static final double TEMP_INIT = 200.0;
 	public static void main(String[] args)
 	{
+		double startTime, endTime;
+		startTime = (double)System.nanoTime();
 		Roster currentSolution = RosterFactory.createRoster("Files/160_3_0.6.1");
 		Random rand = new Random();
-		long temperature = System.nanoTime() + TimeUnit.MINUTES.toNanos(3);
-		TableSeater.organize(currentSolution);
+		double temperature = TEMP_INIT;
+		double deltaTemp;
+		Roster neighborSolution;
 		Roster bestSolution = hardCopyRoster(currentSolution);
+		TableSeater.organize(currentSolution);
+		while (!verifySolution(currentSolution)){
+			currentSolution = null;
+			currentSolution = hardCopyRoster(bestSolution);
+			TableSeater.organize(currentSolution);
+		}
+		bestSolution = null;
+		bestSolution = hardCopyRoster(currentSolution);
 		bestSolution.updateScore();
 		printSolution(bestSolution);
-		while(temperature >= FROZEN_STATE()){
-			Roster neighborSolution = hardCopyRoster(currentSolution);
+		while(temperature >= FROZEN_STATE){
+			neighborSolution = null;
+			neighborSolution = hardCopyRoster(currentSolution);
 			MovementInducer.moveSolution(neighborSolution);
 			double cost = (-1*neighborSolution.score) - (-1*currentSolution.score);
-			if(accept(cost, temperature) > rand.nextDouble()){
-				currentSolution = neighborSolution;
-				//System.out.println("New current Solution with score= " + currentSolution.score);
-				if(currentSolution.score < bestSolution.score){
-					bestSolution = currentSolution;
-					printSolution(bestSolution);
+			if(verifySolution(neighborSolution)){
+				if(accept(cost, temperature) > rand.nextDouble()){
+					currentSolution = neighborSolution;
+					if(currentSolution.score < bestSolution.score){
+						bestSolution = currentSolution;
+						printSolution(bestSolution);
+					}
 				}
 			} 
+			endTime = (double)System.nanoTime();
+			deltaTemp = (endTime - startTime)/((double)(TimeUnit.MINUTES.toNanos(3)))*TEMP_INIT;
+			temperature-= deltaTemp;
+			startTime = (double)System.nanoTime();
 		}
 	}
 	
@@ -36,7 +55,7 @@ public class Main {
 			corpTotal+=t.seatedCorps.size();
 		}
 		if(corpTotal!=roster.corporationsList.size()){
-			System.out.println("Not everyone is seated");
+			//System.out.println("Not everyone is seated");
 			return false;
 		}
 		for (Table t : roster.tablesList){
@@ -44,7 +63,7 @@ public class Main {
 				c1=roster.corporationsList.get(roster.enemyPairs.get(i)[0]);
 				c2=roster.corporationsList.get(roster.enemyPairs.get(i)[1]);
 				if(t.seatedCorps.contains(c1)&&t.seatedCorps.contains(c2)){
-					System.out.println("Enemies on the same table");
+					//System.out.println("Enemies on the same table");
 					return false;
 				}
 			}
@@ -70,7 +89,7 @@ public class Main {
 		//roster.totalWeight = weight;
 		score = weight + roster.getDeviation(null, null);
 		if(score != roster.score){
-			System.out.println("Score not equal");
+			//System.out.println("Score not equal");
 			return false;	
 		}
 		
@@ -89,7 +108,7 @@ public class Main {
 	
 	static public void printSolution(Roster solution)
 	{
-		System.out.println("New optimum found with score=" + solution.score);
+		//System.out.println("New optimum found with score=" + solution.score);
 		for (Table t: solution.tablesList){
 			String s = "";
 			for (Corporation c: t.seatedCorps){

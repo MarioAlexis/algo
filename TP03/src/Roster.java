@@ -30,24 +30,33 @@ public class Roster {
 			}
 			if(!isSeated){
 				if (c.availableTables.size()>0){
-					if (currentCandidate==null || (c.availableTables.size() < currentCandidate.availableTables.size())){
+					if (currentCandidate==null){
 						currentCandidate = c;
-					} 
+					} else {
+						if((c.availableTables.size() < currentCandidate.availableTables.size())){
+							currentCandidate = c;
+						}
+					}
 				}
 			}
 		}
-		for (Corporation c: corporationsList){
-			boolean isSeated = false;
-			for(Table t: tablesList){		
-				if(t.seatedCorps.contains(c)){
-					isSeated = true;
+		if(currentCandidate != null){
+			for (Corporation c: corporationsList){
+				boolean isSeated = false;
+				for(Table t: tablesList){		
+					if(t.seatedCorps.contains(c)){
+						isSeated = true;
+					}
+				}
+				if(!isSeated){
+					if (c.availableTables.size() == currentCandidate.availableTables.size()){
+						candidates.add(c);
+					}
 				}
 			}
-			if(!isSeated){
-				if (c.availableTables.size() == currentCandidate.availableTables.size()){
-					candidates.add(c);
-				}
-			}
+		}
+		else{
+			return null;
 		}
 		Random rand = new Random();
 		if (candidates.size()==0){

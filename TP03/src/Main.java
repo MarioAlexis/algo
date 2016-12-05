@@ -6,9 +6,14 @@ public class Main {
 	static final double TEMP_INIT = 200.0;
 	public static void main(String[] args)
 	{
+		boolean printSolution = (Integer.parseInt(args[0]) != 0);			// Imprimme info block ou non
+		boolean printtime = (Integer.parseInt(args[1]) != 0);				// Imprimme temps execution ou non
+		
+		long startprog, endprog;
 		double startTime, endTime;
+		startprog = System.nanoTime();
 		startTime = (double)System.nanoTime();
-		Roster currentSolution = RosterFactory.createRoster("Files/160_3_0.6.1");
+		Roster currentSolution = RosterFactory.createRoster(args[2]);
 		Random rand = new Random();
 		double temperature = TEMP_INIT;
 		double deltaTemp;
@@ -23,7 +28,7 @@ public class Main {
 		bestSolution = null;
 		bestSolution = hardCopyRoster(currentSolution);
 		bestSolution.updateScore();
-		printSolution(bestSolution);
+		printSolution(printSolution, bestSolution);
 		while(temperature >= FROZEN_STATE){
 			neighborSolution = null;
 			neighborSolution = hardCopyRoster(currentSolution);
@@ -34,7 +39,10 @@ public class Main {
 					currentSolution = neighborSolution;
 					if(currentSolution.score < bestSolution.score){
 						bestSolution = currentSolution;
-						printSolution(bestSolution);
+						if(printSolution)
+						{
+							printSolution(printSolution, bestSolution);
+						}
 					}
 				}
 			} 
@@ -42,6 +50,11 @@ public class Main {
 			deltaTemp = (endTime - startTime)/((double)(TimeUnit.MINUTES.toNanos(3)))*TEMP_INIT;
 			temperature-= deltaTemp;
 			startTime = (double)System.nanoTime();
+		}
+		endprog = System.nanoTime();
+		if(printtime)
+		{
+			System.out.println("Temps d'execution du programme : " + TimeUnit.NANOSECONDS.toSeconds(endprog-startprog) + " secondes");
 		}
 	}
 	
@@ -106,17 +119,19 @@ public class Main {
 		return System.nanoTime();
 	}
 	
-	static public void printSolution(Roster solution)
+	static public void printSolution(boolean print, Roster solution)
 	{
 		//System.out.println("New optimum found with score=" + solution.score);
-		for (Table t: solution.tablesList){
-			String s = "";
-			for (Corporation c: t.seatedCorps){
-				s = s + c.id + " ";
+		if(print){
+			for (Table t: solution.tablesList){
+				String s = "";
+				for (Corporation c: t.seatedCorps){
+					s = s + c.id + " ";
+				}
+				System.out.println(s);
 			}
-			System.out.println(s);
+			System.out.println("fin");
 		}
-		System.out.println("fin");
 	}
 	
 	static public Roster hardCopyRoster(Roster toCopy)

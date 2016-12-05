@@ -1,0 +1,558 @@
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.6.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.6.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.6.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.6.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_1_0.6.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.6.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.6.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.6.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.6.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_3_0.6.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.6.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.6.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.6.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.6.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 160_5_0.6.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.3.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.3.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.3.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.3.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.3.5
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.6.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.6.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.6.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.6.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_1_0.6.5
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.3.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.3.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.6.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.6.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.6.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.6.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_3_0.6.5
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.6.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.6.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.6.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.6.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 20_5_0.6.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.3.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.3.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.3.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.3.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.3.5
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.6.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.6.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.6.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.6.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_1_0.6.5
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.6.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.6.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.6.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.6.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_3_0.6.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.6.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.6.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.6.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.6.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 40_5_0.6.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.3.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.6.1
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.6.2
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.6.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.6.4
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_1_0.6.5
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.6.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.6.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.6.3
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.6.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_3_0.6.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.3.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.3.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.3.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.3.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.3.5
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.6.1
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.6.2
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.6.3
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.6.4
+
+Temps d'execution du programme : 180 secondes
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Fichier : 80_5_0.6.5
+
+Temps d'execution du programme : 180 secondes
+

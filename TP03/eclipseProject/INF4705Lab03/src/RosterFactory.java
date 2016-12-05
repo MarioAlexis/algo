@@ -61,13 +61,13 @@ public class RosterFactory {
 		    }
 		} catch (IOException e) {
 			error = true;
-			System.out.println(e);
+			System.exit(1);
 		} finally {
 		    try {
 				br.close();
 			} catch (IOException e) {
 				error = true;
-				System.out.println(e);
+				System.exit(1);
 			}
 		}
 		if (!error){

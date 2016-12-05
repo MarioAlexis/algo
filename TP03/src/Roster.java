@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Roster {
-	double score;
+	double score = 0;
 	int totalWeight = 0;
 	int deviation;
 	public List<int[]> enemyPairs;
@@ -56,8 +56,7 @@ public class Roster {
 					}
 				}
 			}
-		}
-		else{
+		} else {
 			return null;
 		}
 		Random rand = new Random();

@@ -10,18 +10,23 @@ public class TableSeater {
 		Table selectedTable;
 		Corporation candidate;
 		double possibleScore=0;
-		int totalWeight = roster.totalWeight;	
+		int totalWeight = Integer.valueOf(roster.totalWeight);	
 		Random rand = new Random();
+		int iterationCount = 0;
 		List <Table> candidateTables = new ArrayList<Table>();
 		//2 rounds : la premiere exclue les tables ou se trouvent des compagnies adverse et ennemies, le second exclue seulement les ennemis
 		while(round!=2){
 			//On choisi un candidat aleatoirement parmis ceux qui partagent un nombre minimal de tables disponibles
 			candidate = roster.getNextUnseatedCorporation();	
+			if (iterationCount > roster.corporationsList.size()*1.1){
+				iterationCount = 0;
+				candidate = null;
+			}
 			//S'il ne trouve pas de candidat, on change de round et on inclue les tables ou se trouvent des compagnies adverse (poid +1)
 			if(candidate!=null){
 				//Pour toutes les tables disponibles, on estime lecart type et le poid induit par son association au candidat
 				for (Table t : candidate.availableTables){
-					t.possibleInducedWeight = totalWeight;
+					t.possibleInducedWeight = Integer.valueOf(totalWeight);
 					t.possibleDeviation=roster.getDeviation(candidate, t);
 					for (Corporation c: t.seatedCorps){
 						if (c.alliedCorps.contains(candidate)){
@@ -53,24 +58,26 @@ public class TableSeater {
 					}
 				}
 				selectedTable = candidateTables.get(rand.nextInt(candidateTables.size()));
-				totalWeight = selectedTable.possibleInducedWeight;
+				totalWeight = Integer.valueOf(selectedTable.possibleInducedWeight);
 				selectedTable.seatedCorps.add(candidate);
 				selectedTable.peopleSeated+=candidate.representativeCount;
 				//On met a jour le score reel dans notre objet roster
 				roster.score=selectedTable.possibleDeviation + totalWeight;
-				roster.totalWeight = totalWeight;
+				roster.totalWeight = Integer.valueOf(totalWeight);
 				//On met a jour le conteneur de tables disponibles pour tous les candidats
 				for(Corporation c: roster.corporationsList){
 					if (c.enemyCorps.contains(candidate) || (round==0 && c.adverseCorps.contains(candidate))){
 						c.availableTables.remove(selectedTable);
-					} 
-				}				
+					}
+				}
+				iterationCount++;
 			} else {	
 				if (round==0){
 					roster.updateAvailableTables();					
 				}	
 				round++;
 			}
+			roster.updateScore();
 		}
 	}	
 }

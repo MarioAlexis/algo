@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Roster {
-	double score;
+	double score = 0;
 	int totalWeight = 0;
 	int deviation;
 	public List<int[]> enemyPairs;
@@ -19,6 +19,7 @@ public class Roster {
 		notFriendPairs = new ArrayList<int[]>();
 	}
 	public Corporation getNextUnseatedCorporation(){
+		//Cette methode retourne un candidat aleatoirement parmis les entreprises ayant le moins de tables disponibles
 		Corporation currentCandidate = null;
 		List<Corporation> candidates = new ArrayList<Corporation>();
 		for (Corporation c: corporationsList){
@@ -40,6 +41,7 @@ public class Roster {
 				}
 			}
 		}
+		//Tous les candidats netant pas assis et ayant le meme nombre de tables disponibles (minimal) sont mis dans un conteuneur duquel on selectionnera le candidat final au hasard
 		if(currentCandidate != null){
 			for (Corporation c: corporationsList){
 				boolean isSeated = false;
@@ -54,8 +56,7 @@ public class Roster {
 					}
 				}
 			}
-		}
-		else{
+		} else {
 			return null;
 		}
 		Random rand = new Random();

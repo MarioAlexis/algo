@@ -102,7 +102,7 @@ public class Main {
 		//roster.totalWeight = weight;
 		score = weight + roster.getDeviation(null, null);
 		if(score != roster.score){
-			//System.out.println("Score not equal");
+			//System.out.println("Score not equal" + roster.score);
 			return false;	
 		}
 		
@@ -139,7 +139,7 @@ public class Main {
 		// friends copy
 		Roster toReturn = new Roster();
 		
-		toReturn.totalWeight = toCopy.totalWeight;
+		toReturn.totalWeight = Integer.valueOf(toCopy.totalWeight);
 /*		for(int i=0; i < toCopy.friendPairs.size(); i++)
 		{
 			toReturn.friendPairs.add(toCopy.notFriendPairs.get(i));
